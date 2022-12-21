@@ -2,11 +2,13 @@
 
 Team 404 clone of [Sany07/Job-Portal-Django](https://github.com/Sany07/Job-Portal-Django)
 
+
 ## Install requirements
 
 ```
 pip install -r requirements.txt
 ```
+#### note: Comment this module `psycopg2==2.8.6` in `requirements.txt` for local development
 
 ## Database
 
