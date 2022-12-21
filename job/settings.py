@@ -28,11 +28,7 @@ SECRET_KEY = 'etdq)uvq=t0rc&ams5_ovn6w8bcwknjj0u97*(#n^(76x*+dr1'
 DEBUG = True
 
 # ALLOWED_HOSTS = ['127.0.0.1:8000, djobportal.herokuapp.com']
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'localhost',
-    'django-server-production-c8fd.up.railway.app'
-]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
