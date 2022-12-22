@@ -87,4 +87,5 @@ python manage.py runserver localhost:80
 
 ### You may now view the app on your browser via url: [http://localhost](http://localhost:80)
 
+### Mote django info for vscode [@here](https://code.visualstudio.com/docs/python/tutorial-django)
 ### Post an issue for any concerns
