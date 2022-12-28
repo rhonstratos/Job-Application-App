@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i|Playfair+Display:400,400i,500,500i,600,600i,700,700i&subset=cyrillic");
+@import url("https://fonts.googleapis.com/css?family=Nunito:200,300,400,700");
 
 /*--------------------------------------------------------------
 # Header
@@ -320,6 +321,10 @@
   }
 }
 
+
+
+
+
 /*--------------------------------------------------------------
 # Sections General
 --------------------------------------------------------------*/
@@ -503,6 +508,43 @@ section {
   }
 }
 
+
+/*--------------------------------------------------------------
+# Cta
+--------------------------------------------------------------*/
+.cta {
+  background: #d43076;
+  padding: 50px 0;
+}
+
+.cta h3 {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.cta p {
+  color: #fff;
+}
+
+.cta .cta-btn {
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 8px 28px;
+  border-radius: 25px;
+  transition: 0.5s;
+  margin-top: 10px;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.cta .cta-btn:hover {
+  background: #e4679d;
+  border-color: #e4679d;
+}
+
 /*--------------------------------------------------------------
 # Skills
 --------------------------------------------------------------*/
@@ -536,6 +578,67 @@ section {
   height: 10px;
   transition: 0.9s;
   background-color: #dd5a92;
+}
+
+
+/*--------------------------------------------------------------
+# Values
+--------------------------------------------------------------*/
+.values .card {
+  border: 0;
+  padding: 160px 20px 20px 20px;
+  position: relative;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.values .card-body {
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px 30px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  transition: ease-in-out 0.4s;
+  border-radius: 5px;
+}
+
+.values .card-title {
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.values .card-title a {
+  color: #473d3a;
+}
+
+.values .card-text {
+  color: #4b4949;
+}
+
+.values .read-more a {
+  color: #656262;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 12px;
+  transition: 0.4s;
+}
+
+.values .read-more a:hover {
+  text-decoration: underline;
+}
+
+.values .card:hover .card-body {
+  background: #d43076;
+}
+
+.values .card:hover .read-more a,
+.values .card:hover .card-title,
+.values .card:hover .card-title a,
+.values .card:hover .card-text {
+  color: #fff;
 }
 
 /*--------------------------------------------------------------
@@ -963,15 +1066,11 @@ section {
 /*--------------------------------------------------------------
 # Contact
 --------------------------------------------------------------*/
-.contact .contact-about h3 {
-  font-size: 36px;
-  margin: 0 0 10px 0;
+.contact .contact-about img {
   padding: 0;
-  line-height: 1;
-  font-weight: 300;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: #d43076;
+  margin: 0;
+  max-height: 40px;
+  margin-bottom: 15px;
 }
 
 .contact .contact-about p {
@@ -1008,6 +1107,7 @@ section {
 
 .contact .info {
   color: #5a656e;
+  margin-bottom: 25px;
 }
 
 .contact .info i {
@@ -1121,12 +1221,18 @@ section {
 
 #footer .copyright {
   text-align: center;
+  color: #5a656e;
 }
+
 
 #footer .credits {
   padding-top: 8px;
   text-align: center;
   font-size: 13px;
+}
+
+#footer .credits span{
+  color: #d43076;
 }
 
 /*--------------------------------------------------------------
@@ -1310,7 +1416,7 @@ section {
   position: absolute;
   right: 0;
   left: 20px;
-  color: #ffb8a1;
+  color: #d43076;
 }
 
 .faq .faq-list .icon-show,
@@ -1335,7 +1441,7 @@ section {
 }
 
 .faq .faq-list a.collapsed:hover {
-  color: #ff5821;
+  color: #d43076;
 }
 
 .faq .faq-list a.collapsed .icon-show {
@@ -1807,13 +1913,13 @@ h1, h2, h3, h4 {
   .home-section h1 {
     font-size: 3rem;
     color: #fff;
-    font-weight: 200; }
+    font-weight: semibold; }
     @media (max-width: 991.98px) {
       .home-section h1 {
         font-size: 2rem; } }
   .home-section p {
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.6); }
+    font-size: 1.5rem;
+    color: #fff;}
   .home-section .search-jobs-form .form-control, .home-section .search-jobs-form .btn-lg {
     height: calc(2em + 1rem + 2px);
     padding: 0.5rem 1rem;
@@ -2181,17 +2287,17 @@ h1, h2, h3, h4 {
 .text-muted {
   color: #d5d5d5 !important; }
 
-.section-title {
+/* .section-title {
   font-size: 2rem;
-  font-weight: 500; }
+  font-weight: 500; } */
 
 .section-title-sub {
   font-size: 1rem;
   color: #ced4da; }
 
 .section-hero, .section-hero > .container > .row {
-  height: 100vh;
-  min-height: 900px; }
+  height: 60vh;
+  min-height: 600px; }
 
 .section-hero.inner-page, .section-hero.inner-page > .container > .row {
   height: auto;
@@ -2273,8 +2379,8 @@ h1, h2, h3, h4 {
 .btn.btn-primary {
   color: #fff; }
   .btn.btn-primary:hover {
-    background: #90c317;
-    border-color: #90c317; }
+    background: #e4679d;
+    border-color: #e4679d; }
 
 .btn.btn-outline-white {
   background: transparent;
