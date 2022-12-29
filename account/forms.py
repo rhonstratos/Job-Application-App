@@ -10,7 +10,7 @@ class EmployeeRegistrationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         UserCreationForm.__init__(self, *args, **kwargs)
         self.fields['gender'].required = True
-        self.fields['Username'].label = "Username :"
+        self.fields['username'].label = "Username :"
         self.fields['email'].label = "Email :"
         self.fields['first_name'].label = "First Name :"
         self.fields['last_name'].label = "Last Name :"
