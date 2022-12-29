@@ -626,10 +626,6 @@ section {
   transition: 0.4s;
 }
 
-.values .read-more a:hover {
-  text-decoration: underline;
-}
-
 .values .card:hover .card-body {
   background: #d43076;
 }
