@@ -259,6 +259,12 @@ jQuery(function($) {
 
 	}
 	quillInit();
+
+
+	/**
+   * Initiate Pure Counter 
+   */
+	new PureCounter();
   
 
 });

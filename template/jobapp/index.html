@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
 {% block content %}
 
 <!-- HOME -->
@@ -26,7 +27,7 @@
 
 </section>
 
-<section class="py-5 bg-image overlay-primary fixed overlay" id="next"
+<!-- <section class="py-5 bg-image overlay-primary fixed overlay" id="next"
   style="background-image: url('{% static 'images/hero_1.jpg' %}');">
   <div class="container">
     <div class="row mb-5 justify-content-center">
@@ -69,7 +70,403 @@
 
     </div>
   </div>
+</section> -->
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex flex-column align-items-center justify-content-center">
+  <h1>Welcome to JobApp<span>200</span></h1>
+  <h2>HTTP status code “200”: Job Found! Join, Work And Succeed</h2>
+  <a href="#header" class="btn-get-started scrollto scroll-button smoothscroll"><i class="bi bi-chevron-double-down"></i></a>
+</section><!-- End Hero -->
+
+ <!-- ======= Header ======= -->
+ <header id="header" class="d-flex align-items-center">
+  <div class="container d-flex align-items-center justify-content-between">
+
+    <div class="logo">
+      <!-- <h1><a href="index.html">JobApp<span>200</span></a></h1> -->
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <a href="#"><img src="static/images/job app 200-transparent.png" alt="" class="img-fluid"></a>
+    </div>
+
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+        <li><a class="nav-link scrollto" href="#about">About</a></li>
+        <li><a class="nav-link scrollto" href="#rjobsearch">Job Search</a></li>
+        <li><a class="nav-link scrollto" href="#stats">Stats</a></li>
+        <li><a class="nav-link scrollto" href="#team">Team</a></li>
+        <li><a class="nav-link scrollto" href="#faq">FAQ</a></li>
+        <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+        <li class="dropdown"><a href="#"><span>Register</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="#">Job Seeker</a></li>
+            <li><a href="#">Job Provider</a></li>
+          </ul>
+        </li>
+        <li><a class="nav-link scrollto" href="#login">Login</a></li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+  </div>
+</header><!-- End Header -->
+
+<!-- ======= About Section ======= -->
+<section id="about" class="about">
+  <div class="container">
+
+    <div class="row no-gutters">
+      <div class="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-lg-start"></div>
+      <div class="col-xl-7 ps-0 ps-lg-5 pe-lg-1 d-flex align-items-stretch">
+        <div class="content d-flex flex-column justify-content-center">
+          <h3>About Us</h3>
+          <p>
+            Why JobApp200? The developers, Team 404 or the HTTP status code “404” means “file not found”. The name is not applicable for this job portal so the team decided to put "200" instead since it is the exact opposite of the Group's name. The HTTP status code JobApp “200” states that jobs can be easily found here and a guaranteed success. Join, Work And Succeed.
+          </p>
+     
+        </div><!-- End .content-->
+      </div>
+    </div>
+
+  </div>
+</section><!-- End About Section -->
+
+
+
+<section class="home-section section-hero overlay bg-image"
+  style="background-image: url('{% static 'images/hero_laptop.jpg' %}');" id="home-section">
+
+  <div class="container">
+    <div class="row align-items-center justify-content-center">
+      <div class="col-md-12">
+        <div class="mb-5 text-center">
+          <h1 class="text-white">Find the jobs that matter to you</h1>
+          <p>Getting hired just got easy</p>
+        </div>
+        <form method="GET" action="{% url 'jobapp:search_result' %}" class="search-jobs-form">
+          {% include 'jobapp/search.html' %}
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- <a href="#next" class="scroll-button smoothscroll">
+    <span class=" icon-keyboard_arrow_down"></span>
+  </a> -->
+
 </section>
+
+
+<!-- ======= Services Section ======= -->
+<section id="services" class="services section-bg">
+  <div class="container">
+
+    <div class="section-title section-counter">
+      <h2>JobApp200 Stats</h2>
+      <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-lg-3 align-items-stretch mb-5 mb-lg-0">
+        <div class="icon-box">
+          <div class="icon"><i class="bx bx-briefcase-alt-2"></i></div>
+          <h4 class="title"><strong class="number" data-number="{{ total_candidates }}">0</strong></h4>
+          <p class="description">Candidates</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3 align-items-stretch mb-5 mb-lg-0">
+        <div class="icon-box">
+          <div class="icon"><i class="bx bx-news"></i></div>
+          <h4 class="title"> <strong class="number" data-number="{{ total_jobs }}">0</strong></h4>
+          <p class="description">Jobs Posted</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3 align-items-stretch mb-5 mb-lg-0">
+        <div class="icon-box">
+          <div class="icon"><i class="bx bx-message-square-edit"></i></div>
+          <h4 class="title"><strong class="number" data-number="{{ total_completed_jobs }}">0</strong></h4>
+          <p class="description">Jobs Filled</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3 align-items-stretch mb-5 mb-lg-0">
+        <div class="icon-box">
+          <div class="icon"><i class="bx bx-buildings"></i></div>
+          <h4 class="title"><strong class="number" data-number="{{ total_companies }}">0</strong></h4>
+          <p class="description">Companies</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section><!-- End Services Section -->
+
+<!-- ======= Cta Section ======= -->
+<section id="cta" class="cta">
+  <div class="container" data-aos="fade-in">
+    {% if request.user.role == "employer" %}
+    <div class="text-center">
+      <h3>Want To Hire?</h3>
+      <p> Join the team and post a job in order to discover competitive and willing job seekers to work for your company!</p>
+      <a href="{% url 'jobapp:create-job' %}" class="cta-btn">Post Your Job</a>
+    </div>
+    {% elif request.user.role == "employee" %}
+    <div class="text-center">
+      <h3>Looking For A Job?</h3>
+      <p> It's your lucky day! View all of the list of available jobs and this is your chance to get your dream job.</p>
+      <a class="cta-btn" href="{% url 'jobapp:job-list' %}">Job List</a>
+    </div>
+    {% else %}
+    <div class="text-center">
+      <h3>Looking For A Job?</h3>
+      <p> Sign Up now and get a chance to apply for your dream job. Getting hired just got easy for you!</p>
+      <a class="cta-btn" href="{% url 'account:employee-registration' %}">Sign Up</a>
+    </div>
+    {% endif %}
+  </div>
+</section><!-- End Cta Section -->
+
+
+<!-- ======= Values Section ======= -->
+<section id="values" class="values">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-6 d-flex align-items-stretch" data-aos="fade-up">
+        <div class="card" style="background-image: url(static/images/mission.jpg);">
+          <div class="card-body">
+            <h5 class="card-title"><a href="">Our Mission</a></h5>
+            <p class="card-text">JobApp200 assists job seekers and employers to achieve employment and respond to the emerging needs and opportunities with creativity.</p>
+            <div class="read-more"><a href="#"><i class="bi bi-arrow-right"></i> Read More</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="100">
+        <div class="card" style="background-image: url(static/images/vision.jpg);">
+          <div class="card-body">
+            <h5 class="card-title"><a href="">Our Vision</a></h5>
+            <p class="card-text">Sustainable employment within a healthy community and building a better community-one organization, one career at a time.</p>
+            <div class="read-more"><a href="#"><i class="bi bi-arrow-right"></i> Read More</a></div>
+          </div>
+        </div>
+
+      </div>
+      <!-- <div class="col-md-6 d-flex align-items-stretch mt-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="card" style="background-image: url(static/images/values-3.jpg);">
+          <div class="card-body">
+            <h5 class="card-title"><a href="">Our Vision</a></h5>
+            <p class="card-text">Nemo enim ipsam voluptatem quia voluptas sit aut odit aut fugit, sed quia magni dolores.</p>
+            <div class="read-more"><a href="#"><i class="bi bi-arrow-right"></i> Read More</a></div>
+          </div>
+        </div>
+      </div> -->
+      <!-- <div class="col-md-6 d-flex align-items-stretch mt-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="card" style="background-image: url(static/images/values-4.jpg);">
+          <div class="card-body">
+            <h5 class="card-title"><a href="">Our Care</a></h5>
+            <p class="card-text">Nostrum eum sed et autem dolorum perspiciatis. Magni porro quisquam laudantium voluptatem.</p>
+            <div class="read-more"><a href="#"><i class="bi bi-arrow-right"></i> Read More</a></div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+  </div>
+</section><!-- End Values Section -->
+
+
+
+<!-- ======= Team Section ======= -->
+<section id="team" class="team section-bg">
+  <div class="container">
+
+    <div class="section-title">
+      <h2 data-aos="fade-up">Team</h2>
+      <!-- <p data-aos="fade-up">Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
+    </div>
+
+    <div class="row">
+
+      <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up">
+        <div class="member">
+          <div class="member-img">
+            <img src="static/images/team/roe.jpg" class="img-fluid" alt="">
+            <div class="social">
+              <a href=""><i class="bi bi-twitter"></i></a>
+              <a href=""><i class="bi bi-facebook"></i></a>
+              <a href=""><i class="bi bi-instagram"></i></a>
+              <a href=""><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+          <div class="member-info">
+            <h4>Bantuan, Jan Roe</h4>
+            <span>IT Student</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up">
+        <div class="member">
+          <div class="member-img">
+            <img src="static/images/team/allen.jpg" class="img-fluid" alt="">
+            <div class="social">
+              <a href=""><i class="bi bi-twitter"></i></a>
+              <a href=""><i class="bi bi-facebook"></i></a>
+              <a href=""><i class="bi bi-instagram"></i></a>
+              <a href=""><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+          <div class="member-info">
+            <h4>Buñing, Allen Vincent</h4>
+            <span>IT Student</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up">
+        <div class="member">
+          <div class="member-img">
+            <img src="static/images/team/ronald.jpg" class="img-fluid" alt="">
+            <div class="social">
+              <a href=""><i class="bi bi-twitter"></i></a>
+              <a href=""><i class="bi bi-facebook"></i></a>
+              <a href=""><i class="bi bi-instagram"></i></a>
+              <a href=""><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+          <div class="member-info">
+            <h4>Ronald Dy Tioco</h4>
+            <span>IT Student</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+        <div class="member">
+          <div class="member-img">
+            <img src="static/images/team/dean.jpg" class="img-fluid" alt="">
+            <div class="social">
+              <a href=""><i class="bi bi-twitter"></i></a>
+              <a href=""><i class="bi bi-facebook"></i></a>
+              <a href=""><i class="bi bi-instagram"></i></a>
+              <a href=""><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+          <div class="member-info">
+            <h4>Gaspar, Dean Justine</h4>
+            <span>IT Student</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+        <div class="member">
+          <div class="member-img">
+            <img src="static/images/team/mark.jpg" class="img-fluid" alt="">
+            <div class="social">
+              <a href=""><i class="bi bi-twitter"></i></a>
+              <a href=""><i class="bi bi-facebook"></i></a>
+              <a href=""><i class="bi bi-instagram"></i></a>
+              <a href=""><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+          <div class="member-info">
+            <h4>Godoy, Mark Justine</h4>
+            <span>IT Student</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+        <div class="member">
+          <div class="member-img">
+            <img src="static/images/team/markhenry.jpg" class="img-fluid" alt="">
+            <div class="social">
+              <a href=""><i class="bi bi-twitter"></i></a>
+              <a href=""><i class="bi bi-facebook"></i></a>
+              <a href=""><i class="bi bi-instagram"></i></a>
+              <a href=""><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+          <div class="member-info">
+            <h4>Moraga, Mark Henry</h4>
+            <span>IT Student</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section><!-- End Team Section -->
+
+
+
+<!-- ======= F.A.Q Section ======= -->
+<section id="faq" class="faq section-bg">
+  <div class="container">
+
+    <div class="section-title">
+      <h2 data-aos="fade-up">F.A.Q</h2>
+      <!-- <p data-aos="fade-up">Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
+    </div>
+
+    <div class="faq-list">
+      <ul>
+        <li data-aos="fade-up">
+          <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">How do I create an account? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+          <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
+            <p>
+              In order for you to use all the features, you will be asked to create an account by filling in your email address. After that it is possible to create a password. You can then use these details to log into your account.
+            </p>
+          </div>
+        </li>
+
+        <li data-aos="fade-up" data-aos-delay="100">
+          <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">How can I search my preferred job? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+          <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
+            <p>
+              Searching your preferred job is so easy thanks to JobApp200's job search engine. You need to type what job are you looking for, your location, select what job type do you prefer (ex. Full time or Part time) then click the search button and wait for the results.
+            </p>
+          </div>
+        </li>
+
+        <li data-aos="fade-up" data-aos-delay="200">
+          <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">How to apply for a specific job offer? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+          <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
+            <p>
+              Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+            </p>
+          </div>
+        </li>
+
+        <li data-aos="fade-up" data-aos-delay="300">
+          <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">Do I need to be a college graduate in order to be qualified? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+          <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
+            <p>
+              Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in.
+            </p>
+          </div>
+        </li>
+
+        <li data-aos="fade-up" data-aos-delay="400">
+          <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">How can I know if I am accepted? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+          <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
+            <p>
+              Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque.
+            </p>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+</section><!-- End F.A.Q Section -->
+
 
 <section id="ajax_listing_paginattion" class="site-section">
   <div class="container">
@@ -124,7 +521,7 @@
   {% endif %}
 </section>
 
-<section class="py-5 bg-image overlay-primary fixed overlay" style="background-image: url('{% static 'images/hero_1.jpg' %}');">
+<!-- <section class="py-5 bg-image overlay-primary fixed overlay" style="background-image: url('{% static 'images/hero_1.jpg' %}');">
   <div class="container">
     {% if request.user.role == "employer" %}
     <div class="row align-items-center">
@@ -162,9 +559,9 @@
     {% endif %}
   </div>
 </section>
-<section class="bg-light pt-5 testimony-full">
+<section class=" pt-5 testimony-full section-bg"> -->
 
-  <div class="owl-carousel single-carousel">
+  <!-- <div class="owl-carousel single-carousel"> -->
 
 
     <!-- <div class="container">
@@ -197,9 +594,9 @@
       </div>
     </div> -->
 
-  </div>
+  <!-- </div>
 
-</section>
+</section> -->
 
 
 {% endblock %}
