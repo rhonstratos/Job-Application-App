@@ -7,17 +7,27 @@ from account.models import User
 
 class EmployeeRegistrationForm(UserCreationForm):
 
-
     def __init__(self, *args, **kwargs):
         UserCreationForm.__init__(self, *args, **kwargs)
         self.fields['gender'].required = True
+        self.fields['Username'].label = "Username :"
+        self.fields['email'].label = "Email :"
         self.fields['first_name'].label = "First Name :"
         self.fields['last_name'].label = "Last Name :"
         self.fields['password1'].label = "Password :"
         self.fields['password2'].label = "Confirm Password :"
-        self.fields['email'].label = "Email :"
         self.fields['gender'].label = "Gender :"
 
+        self.fields['username'].widget.attrs.update(
+            {
+                'placeholder': 'Enter Username',
+            }
+        )
+        self.fields['email'].widget.attrs.update(
+            {
+                'placeholder': 'Enter Email',
+            }
+        )
         self.fields['first_name'].widget.attrs.update(
             {
                 'placeholder': 'Enter First Name',
@@ -26,11 +36,6 @@ class EmployeeRegistrationForm(UserCreationForm):
         self.fields['last_name'].widget.attrs.update(
             {
                 'placeholder': 'Enter Last Name',
-            }
-        )
-        self.fields['email'].widget.attrs.update(
-            {
-                'placeholder': 'Enter Email',
             }
         )
         self.fields['password1'].widget.attrs.update(
@@ -46,9 +51,10 @@ class EmployeeRegistrationForm(UserCreationForm):
 
     class Meta:
 
-        model=User
+        model = User
 
-        fields = ['first_name', 'last_name', 'email', 'password1', 'password2', 'gender']
+        fields = ['username', 'email','first_name', 'last_name',
+				'password1', 'password2', 'gender']
 
     def clean_gender(self):
         gender = self.cleaned_data.get('gender')
@@ -57,7 +63,7 @@ class EmployeeRegistrationForm(UserCreationForm):
         return gender
 
     def save(self, commit=True):
-        user = UserCreationForm.save(self,commit=False)
+        user = UserCreationForm.save(self, commit=False)
         user.role = "employee"
         if commit:
             user.save()
@@ -99,15 +105,16 @@ class EmployerRegistrationForm(UserCreationForm):
                 'placeholder': 'Confirm Password',
             }
         )
+
     class Meta:
 
-        model=User
+        model = User
 
-        fields = ['first_name', 'last_name', 'email', 'password1', 'password2',]
-
+        fields = ['first_name', 'last_name',
+                  'email', 'password1', 'password2',]
 
     def save(self, commit=True):
-        user = UserCreationForm.save(self,commit=False)
+        user = UserCreationForm.save(self, commit=False)
         user.role = "employer"
         if commit:
             user.save()
@@ -115,12 +122,12 @@ class EmployerRegistrationForm(UserCreationForm):
 
 
 class UserLoginForm(forms.Form):
-    email =  forms.EmailField(
-    widget=forms.EmailInput(attrs={ 'placeholder':'Email',})
-) 
-    password = forms.CharField(strip=False,widget=forms.PasswordInput(attrs={
-        
-        'placeholder':'Password',
+    email = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Email', })
+    )
+    password = forms.CharField(strip=False, widget=forms.PasswordInput(attrs={
+
+        'placeholder': 'Password',
     }))
 
     def clean(self, *args, **kwargs):
@@ -128,9 +135,15 @@ class UserLoginForm(forms.Form):
         password = self.cleaned_data.get("password")
 
         if email and password:
-            self.user = authenticate(email=email, password=password)
+            if '@' in email:
+                self.user = authenticate(email=email, password=password)
+            else:
+                self.user = authenticate(username=email, password=password)
             try:
-                user = User.objects.get(email=email)
+                if '@' in email:
+                    user = User.objects.get(email=email)
+                else:
+                    user = User.objects.get(username=email)
             except User.DoesNotExist:
                 raise forms.ValidationError("User Does Not Exist.")
 
@@ -144,7 +157,6 @@ class UserLoginForm(forms.Form):
 
     def get_user(self):
         return self.user
-
 
 
 class EmployeeProfileEditForm(forms.ModelForm):

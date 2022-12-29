@@ -1,29 +1,73 @@
-# Job Portal
-Django Job Portal.       
+# Job Portal App
 
+Team 404 clone of [Sany07/Job-Portal-Django](https://github.com/Sany07/Job-Portal-Django)
 
-## Installation 
-
-```
-open terminal and type
-https://github.com/Sany07/Job-Portal.git
-
-or simply download using the url below
-https://github.com/Sany07/Job-Portal.git
-```
 
 ## Install requirements
 
 ```
 pip install -r requirements.txt
 ```
+#### note: Comment this module `psycopg2==2.8.6` in `requirements.txt` for local development
+
 ## Database
 
 ```
 Set the database from settings.py
 ```
 
+## To initialize the app for development, edit `job/settings.py` and update from
+
+```
+DATABASES = {
+    'default': {
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'django_job_app_dev',
+        # 'USER': 'root',
+        # 'PASSWORD': 'root',
+        # 'HOST': 'localhost',
+        # 'PORT': '3306',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ["PGDATABASE"],
+        'USER': os.environ["PGUSER"],
+        'PASSWORD': os.environ["PGPASSWORD"],
+        'HOST': os.environ["PGHOST"],
+        'PORT': os.environ["PGPORT"],
+    }
+}
+```
+
+## to
+
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django_job_app_dev',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': os.environ["PGDATABASE"],
+        # 'USER': os.environ["PGUSER"],
+        # 'PASSWORD': os.environ["PGPASSWORD"],
+        # 'HOST': os.environ["PGHOST"],
+        # 'PORT': os.environ["PGPORT"],
+    }
+}
+```
+
+## Then create new database in mysql server in xampp, or any mysql server
+
+```
+CREATE DATABASE django_job_app_dev
+```
+
+#### note: xampp mysql servers defaults to `user:root` and `password:<empty>`, update your `job/settings.py` properly
+
 ## To migrate the database open terminal in project directory and type
+
 ```
 python manage.py makemigrations
 python manage.py migrate
@@ -36,23 +80,12 @@ python manage.py collectstatic
 ```
 
 ## Run the server
+
 ```
-python manage.py runserver
+python manage.py runserver localhost:80
 ```
 
-![Settings Window](https://raw.github.com/Sany07/Django-Job-Portal/master/screenshots/screencapture-127-0-0-1-8000-2020-05-08-17_03_46.png)
+### You may now view the app on your browser via url: [http://localhost](http://localhost:80)
 
-![Settings Window](https://raw.github.com/Sany07/Django-Job-Portal/master/screenshots/screencapture-127-0-0-1-8000-jobs-2020-05-08-17_40_01.png)
-
-![Settings Window](https://raw.github.com/Sany07/Django-Job-Portal/master/screenshots/screencapture-127-0-0-1-8000-job-79-2020-05-08-16_59_55.png)
-
-![Settings Window](https://raw.github.com/Sany07/Django-Job-Portal/master/screenshots/screencapture-127-0-0-1-8000-job-create-2020-05-08-17_00_46.png)
-
-![Settings Window](https://raw.github.com/Sany07/Django-Job-Portal/master/screenshots/screencapture-127-0-0-1-8000-dashboard-2020-05-08-17_01_07.png)
-
-![Settings Window](https://raw.github.com/Sany07/Django-Job-Portal/master/screenshots/screencapture-127-0-0-1-8000-dashboard-employer-job-54-applicants-2020-05-08-17_01_34.png)
-
-<div align="center">
-    <h3>========Thank You=========</h3>
-</div>
-
+### Mote django info for vscode [@here](https://code.visualstudio.com/docs/python/tutorial-django)
+### Post an issue for any concerns
