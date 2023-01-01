@@ -6,7 +6,7 @@
 </div>
 
 
-<div class="site-wrap">
+<!-- <div class="site-wrap">
 
   <div class="site-mobile-menu site-navbar-target">
     <div class="site-mobile-menu-header">
@@ -15,11 +15,11 @@
       </div>
     </div>
     <div class="site-mobile-menu-body"></div>
-  </div> <!-- .site-mobile-menu -->
+  </div> .site-mobile-menu -->
   
 
   <!-- NAVBAR -->
-  <header class="site-navbar mt-3">
+  <!-- <header class="site-navbar mt-3">
     <div class="container-fluid">
       <div class="row align-items-center">
         <div class="site-logo col-6"><a href="{% url 'jobapp:home' %}">DJobPortal</a></div>
@@ -65,11 +65,11 @@
                     <li><a href="{% url 'jobapp:dashboard' %}">Dashboard</a></li>
                     <li><a href="{% url 'account:logout' %}">Logout</a></li>
                   </ul>
-                </li>
+                </li> -->
                 <!-- <a href="{% url 'account:logout' %}"
                 class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
                   class="mr-2 icon-lock_outline"></span>Log Out</a> -->
-                {% else %}
+                <!-- {% else %}
 
                 <li class="pr-3 has-children">
                   <a>Register</a>
@@ -90,4 +90,66 @@
             class="icon-menu h3 m-0 p-0 mt-2"></span></a>
       </div>
     </div>
-  </header>
+  </header> -->
+
+
+  <!-- ======= Header ======= -->
+ <header id="header" class="d-flex align-items-center">
+  <div class="container d-flex align-items-center justify-content-between">
+
+    <div class="logo">
+      <!-- <h1><a href="index.html">JobApp<span>200</span></a></h1> -->
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <a href="{% url 'jobapp:home' %}"><img src="static/images/job app 200-transparent.png" alt="" class="img-fluid"></a>
+    </div>
+
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link scrollto" href="{% url 'jobapp:home' %}">Home</a></li>
+        <li><a class="nav-link scrollto scroll-button smoothscroll" href="{% url 'jobapp:home' %}">About</a></li>
+        <li><a class="nav-link scrollto scroll-button smoothscroll" href="{% url 'jobapp:home' %}">Job Search</a></li>
+        <li><a class="nav-link scrollto" href="{% url 'jobapp:job-list' %}">Job Listings</a></li>
+        <li><a class="nav-link scrollto scroll-button smoothscroll" href="{% url 'jobapp:home' %}">Team</a></li>
+        <li><a class="nav-link scrollto scroll-button smoothscroll" href="{% url 'jobapp:home' %}">FAQ</a></li>
+        <li><a class="nav-link scrollto scroll-button smoothscroll" href="#contact">Contact</a></li>
+
+        {% if user.is_authenticated and user.role == 'employer'  %}
+        <li><a class="nav-link scrollto" href="{% url 'jobapp:create-job' %}">Publish Job</a></li>
+        <li class="dropdown"><a href="#"><span>Dashboard</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="{% url 'jobapp:dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'account:logout' %}">Logout</a></li>
+          </ul>
+        </li>
+
+        {% elif user.is_authenticated %}
+        <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="{% url 'account:edit-profile' request.user.id %}">Edit Settings</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a href="#"><span>Dashboard</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="{% url 'jobapp:dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'account:logout' %}">Logout</a></li>
+          </ul>
+        </li>
+
+        {% else %}
+
+        <li class="dropdown"><a href="#"><span>Sign Up</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="{% url 'account:employer-registration' %}">Job Provider</a></li>
+            <li><a href="{% url 'account:employee-registration' %}">Job Seeker</a></li>
+          </ul>
+        </li>
+        <li><a class="nav-link scrollto" href="{% url 'account:login' %}">Sign In</a></li>
+
+        {% endif %}
+
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+  </div>
+</header><!-- End Header -->
