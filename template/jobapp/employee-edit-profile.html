@@ -3,7 +3,7 @@
 {% block content %}
 
 <!-- HOME -->
-<section class="section-hero overlay inner-page bg-image"
+<!-- <section class="section-hero overlay inner-page bg-image"
   style="background-image: url('{% static 'images/hero_1.jpg' %}');" id="home-section">
   <div class="container">
     <div class="row">
@@ -16,7 +16,22 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
+
+<!-- ======= Breadcrumbs Section ======= -->
+<section class="breadcrumbs">
+  <div class="container">
+
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>Update Profile </h2>
+      <ol>
+        <li><a href="{% url 'jobapp:home' %}">Home</a></li>
+        <li>Update Profile</li>
+      </ol>
+    </div>
+
+  </div>
+</section><!-- End Breadcrumbs Section -->
 
 <section class="site-section">
   <div class="container">
