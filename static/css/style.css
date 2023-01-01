@@ -1291,7 +1291,7 @@ a {
   float:left;
 }
 .login .login-form label span{
-  color:#ff574e;
+  color:#d43076;
   padding-left:2px;
 }
 .login .login-form input{
@@ -1304,7 +1304,7 @@ a {
   border-radius:30px;  
 }
 .login .login-form input:focus{
-  border-color:#ff574e;
+  border-color:#d43076;
 }
 .login .login-form button,
 .login .login-form  [type=submit] {
