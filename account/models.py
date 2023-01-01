@@ -14,11 +14,12 @@ ROLE = (
 )
 
 class User(AbstractUser):
-	username = models.CharField(max_length=40, unique=True, verbose_name="username",  blank=False, error_messages={'unique': "A user with that username already exists.",})
+	username = models.CharField(max_length=40, unique=True, verbose_name="username", blank=False, error_messages={'unique': "A user with that username already exists.",})
 	email = models.EmailField(unique=True, blank=False, error_messages={'unique': "A user with that email already exists.",})
 	phoneNumber = models.CharField(max_length=20, default='-', verbose_name='phone number', blank=False)
 	role = models.CharField(choices=ROLE, max_length=10)
 	gender = models.CharField(choices=JOB_TYPE, max_length=1)
+	profilePicture = models.ImageField(blank=True, null=True, verbose_name='Profile Picture', upload_to='profileImages')
 	# resume = models.FileField(upload_to='documents/%Y/%m/%d')
 
 	USERNAME_FIELD = 'username'

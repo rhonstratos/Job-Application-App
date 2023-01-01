@@ -1,12 +1,14 @@
 from django.urls import path
 from jobapp import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = "jobapp"
 
 
 urlpatterns = [
 
-    path('', views.home_view, name='home'),
+    path('home', views.home_view, name='home'),
     path('jobs/', views.job_list_View, name='job-list'),
     path('job/create/', views.create_job_View, name='create-job'),
     path('job/<int:id>/', views.single_job_view, name='single-job'),
@@ -25,3 +27,6 @@ urlpatterns = [
 
 
 ]
+
+if settings.DEBUG:
+	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

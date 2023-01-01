@@ -42,7 +42,7 @@
         </div>
         {% endfor %}
         {% endif %}
-        <form method="POST" action="" class="p-4 border rounded">
+        <form method="POST" enctype="multipart/form-data" action="" class="p-4 border rounded">
           {% csrf_token %}
           {% for field in form %}
           {% if field.name == 'gender' %}
@@ -59,6 +59,12 @@
             </div>
           </div>
 
+          {% elif field.name == 'profilePicture' %}
+		  <div class="">
+			<label class="text-black" for="id_{{ field.name }}">{{ field.label }}</label>
+			<input type="{{ field.field.widget.input_type }}" class="form-control" name="{{ field.name }}"
+			  id="id_{{ field.name }}" placeholder="{{ field.field.widget.attrs.placeholder }}">
+		  </div>
           {% else %}
 
           <div class="row form-group">

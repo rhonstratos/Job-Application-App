@@ -10,14 +10,15 @@ class EmployeeRegistrationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         UserCreationForm.__init__(self, *args, **kwargs)
         self.fields['gender'].required = True
-        self.fields['username'].label = "Username :"
-        self.fields['email'].label = "Email :"
-        self.fields['first_name'].label = "First Name :"
-        self.fields['last_name'].label = "Last Name :"
-        self.fields['password1'].label = "Password :"
-        self.fields['password2'].label = "Confirm Password :"
-        self.fields['gender'].label = "Gender :"
+        self.fields['username'].label = "Username"
+        self.fields['email'].label = "Email"
+        self.fields['first_name'].label = "First Name"
+        self.fields['last_name'].label = "Last Name"
+        self.fields['password1'].label = "Password"
+        self.fields['password2'].label = "Confirm Password"
+        self.fields['gender'].label = "Gender"
 
+        profilePicture = forms.ImageField()
         self.fields['username'].widget.attrs.update(
             {
                 'placeholder': 'Enter Username',
@@ -26,16 +27,6 @@ class EmployeeRegistrationForm(UserCreationForm):
         self.fields['email'].widget.attrs.update(
             {
                 'placeholder': 'Enter Email',
-            }
-        )
-        self.fields['first_name'].widget.attrs.update(
-            {
-                'placeholder': 'Enter First Name',
-            }
-        )
-        self.fields['last_name'].widget.attrs.update(
-            {
-                'placeholder': 'Enter Last Name',
             }
         )
         self.fields['password1'].widget.attrs.update(
@@ -48,13 +39,23 @@ class EmployeeRegistrationForm(UserCreationForm):
                 'placeholder': 'Confirm Password',
             }
         )
+        self.fields['first_name'].widget.attrs.update(
+            {
+                'placeholder': 'Enter First Name',
+            }
+        )
+        self.fields['last_name'].widget.attrs.update(
+            {
+                'placeholder': 'Enter Last Name',
+            }
+        )
 
     class Meta:
 
         model = User
 
-        fields = ['username', 'email','first_name', 'last_name',
-				'password1', 'password2', 'gender']
+        fields = ['profilePicture', 'username', 'email', 'password1', 'password2', 
+				'first_name', 'last_name', 'gender']
 
     def clean_gender(self):
         gender = self.cleaned_data.get('gender')
@@ -73,6 +74,7 @@ class EmployeeRegistrationForm(UserCreationForm):
 class EmployerRegistrationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         UserCreationForm.__init__(self, *args, **kwargs)
+        self.fields['username'].label = "Username"
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
         self.fields['first_name'].label = "Company Name"
@@ -80,14 +82,10 @@ class EmployerRegistrationForm(UserCreationForm):
         self.fields['password1'].label = "Password"
         self.fields['password2'].label = "Confirm Password"
 
-        self.fields['first_name'].widget.attrs.update(
+        profilePicture = forms.ImageField()
+        self.fields['username'].widget.attrs.update(
             {
-                'placeholder': 'Enter Company Name',
-            }
-        )
-        self.fields['last_name'].widget.attrs.update(
-            {
-                'placeholder': 'Enter Company Address',
+                'placeholder': 'Enter Username',
             }
         )
         self.fields['email'].widget.attrs.update(
@@ -105,13 +103,23 @@ class EmployerRegistrationForm(UserCreationForm):
                 'placeholder': 'Confirm Password',
             }
         )
+        self.fields['first_name'].widget.attrs.update(
+            {
+                'placeholder': 'Enter Company Name',
+            }
+        )
+        self.fields['last_name'].widget.attrs.update(
+            {
+                'placeholder': 'Enter Company Address',
+            }
+        )
 
     class Meta:
 
         model = User
 
-        fields = ['first_name', 'last_name',
-                  'email', 'password1', 'password2',]
+        fields = ['profilePicture', 'username',  'email', 'password1', 
+			'password2', 'first_name', 'last_name',]
 
     def save(self, commit=True):
         user = UserCreationForm.save(self, commit=False)
@@ -123,10 +131,9 @@ class EmployerRegistrationForm(UserCreationForm):
 
 class UserLoginForm(forms.Form):
     email = forms.CharField(
-        widget=forms.TextInput(attrs={'placeholder': 'Email', })
+        widget=forms.TextInput(attrs={'placeholder': 'Email or username', })
     )
     password = forms.CharField(strip=False, widget=forms.PasswordInput(attrs={
-
         'placeholder': 'Password',
     }))
 
@@ -136,12 +143,13 @@ class UserLoginForm(forms.Form):
 
         if email and password:
             if '@' in email:
-                self.user = authenticate(email=email, password=password)
+                usernameStr = str(User.objects.get(email=email).username)
+                self.user = authenticate(username=usernameStr, password=password)
             else:
                 self.user = authenticate(username=email, password=password)
             try:
                 if '@' in email:
-                    user = User.objects.get(email=email)
+                    user = User.objects.get(username=usernameStr)
                 else:
                     user = User.objects.get(username=email)
             except User.DoesNotExist:
@@ -163,6 +171,8 @@ class EmployeeProfileEditForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(EmployeeProfileEditForm, self).__init__(*args, **kwargs)
+		
+        profilePicture = forms.ImageField()
         self.fields['first_name'].widget.attrs.update(
             {
                 'placeholder': 'Enter First Name',
@@ -176,4 +186,4 @@ class EmployeeProfileEditForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "gender"]
+        fields = ["profilePicture", "first_name", "last_name", "gender"]
