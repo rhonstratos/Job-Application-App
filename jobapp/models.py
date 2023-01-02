@@ -37,6 +37,7 @@ class Job(models.Model):
     salary = models.CharField(max_length=30, blank=True)
     company_name = models.CharField(max_length=300)
     company_description = RichTextField(blank=True, null=True)
+    # company_image = models.ImageField(blank=True, null=True, verbose_name='Company Image', upload_to='companyImage', default='profileImages/no-profile-picture-icon.webp')
     url = models.URLField(max_length=200)
     last_date = models.DateField()
     is_published = models.BooleanField(default=False)
