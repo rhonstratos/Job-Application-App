@@ -84,6 +84,22 @@ def employee_edit_profile(request, id=id):
     return render(request,'account/employee-edit-profile.html',context)
 
 
+@login_required(login_url=reverse_lazy('accounts:login'))
+@user_is_employee
+def employee_edit_password(request, id=id):
+
+    instance_user = get_object_or_404(User, id=int(id))
+    form_edit_password = EmployeeChangePassword(instance_user, data=request.POST or None)
+
+    if form_edit_password.is_valid():
+       form_edit_password.save()
+       messages.success(request, 'Your Password Was Successfully Updated!')
+
+    context={'form_edit_password': form_edit_password}
+
+    return render(request, 'jobapp/change-password.html', context)
+
+
 
 def user_logIn(request):
 

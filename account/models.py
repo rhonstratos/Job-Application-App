@@ -19,8 +19,8 @@ class User(AbstractUser):
 	phoneNumber = models.CharField(max_length=20, default='-', verbose_name='phone number', blank=False)
 	role = models.CharField(choices=ROLE, max_length=10)
 	gender = models.CharField(choices=JOB_TYPE, max_length=1)
-	profilePicture = models.ImageField(blank=True, null=True, verbose_name='Profile Picture', upload_to='profileImages')
-	# resume = models.FileField(upload_to='documents/%Y/%m/%d')
+	profilePicture = models.ImageField(blank=True, null=True, verbose_name='Profile Picture', upload_to='profileImages', default='profileImages/no-profile-picture-icon.webp')
+	resume = models.FileField(upload_to='resumes', blank=True, null=True, verbose_name='Resume')
 
 	USERNAME_FIELD = 'username'
 	REQUIRED_FIELDS = ['email']

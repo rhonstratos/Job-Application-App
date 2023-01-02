@@ -76,10 +76,30 @@
               </div>
             </div>
           </div>
-
-          {% else %}
+          {% elif field.name == 'email' %}
+          <div class="row form-group">
+            <div class="col-md-12 mb-md-0">
+              <label class="text-black" for="id_{{ field.name }}">{{ field.label }}</label><br>
+              <input type="{{ field.field.widget.input_type }}" class="form-control" name="{{ field.name }}"
+                id="id_{{ field.name }}" value="{{ field.value }}"
+                placeholder="{{ field.field.widget.attrs.placeholder }}">
+				<a class="" href="{% url 'account:employee-edit-password' request.user.id %}">Change Password</a>
+            </div>
+          </div>
+          {% elif field.name == 'resume' %}
 
           <div class="row form-group">
+            <div class="col-md-12 mb-3 mb-md-0">
+              <label class="text-black" for="id_{{ field.name }}">{{ field.label }}</label><br>
+			  <a href="{{user.resume.url}}">View current resume</a>	
+              <input type="{{ field.field.widget.input_type }}" class="form-control" name="{{ field.name }}"
+                id="id_{{ field.name }}" value="{{ field.value }}"
+                placeholder="{{ field.field.widget.attrs.placeholder }}">
+            </div>
+          </div>
+		  {% else %}
+
+		  <div class="row form-group">
             <div class="col-md-12 mb-3 mb-md-0">
               <label class="text-black" for="id_{{ field.name }}">{{ field.label }}</label>
               <input type="{{ field.field.widget.input_type }}" class="form-control" name="{{ field.name }}"
@@ -87,7 +107,6 @@
                 placeholder="{{ field.field.widget.attrs.placeholder }}">
             </div>
           </div>
-
           {% endif %}
           {% endfor %}
           <div class="row form-group">
