@@ -121,8 +121,9 @@
                               </div>
                               </div>
                         {% else %}
-                          {% if field.name == 'company_name'%}
+                          {% if field.name == 'company_image'%}
                               <h3 class="text-black mt-5 mb-5 border-bottom pb-2">Company Details</h3>
+							  <img style="width: 100%;" src="{{job.company_image.url}}" />
                           {% endif%}
                         <div class="form-group">
                             <label class="text-black" for="id_{{ field.name }}">{{ field.label }}</label>

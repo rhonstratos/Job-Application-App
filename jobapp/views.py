@@ -61,7 +61,6 @@ def home_view(request):
     print('ok')
     return render(request, 'jobapp/index.html', context)
 
-@cache_page(60 * 15)
 def job_list_View(request):
     """
 
@@ -125,11 +124,8 @@ def single_job_view(request, id):
     """
     Provide the ability to view job details
     """
-    if cache.get(id):
-        job = cache.get(id)
-    else:
-        job = get_object_or_404(Job, id=id)
-        cache.set(id,job , 60 * 15)
+    job = get_object_or_404(Job, id=id)
+    cache.set(id,job , 60 * 15)
     related_job_list = job.tags.similar_objects()
 
     paginator = Paginator(related_job_list, 5)
@@ -383,7 +379,7 @@ def job_edit_view(request, id=id):
 
     job = get_object_or_404(Job, id=id, user=request.user.id)
     categories = Category.objects.all()
-    form = JobEditForm(request.POST or None, instance=job)
+    form = JobEditForm(request.POST or None, request.FILES or None, instance=job)
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
@@ -394,7 +390,7 @@ def job_edit_view(request, id=id):
             'id': instance.id
         }))
     context = {
-
+		'job': job,
         'form': form,
         'categories': categories
     }

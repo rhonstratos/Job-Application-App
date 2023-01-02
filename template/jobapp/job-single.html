@@ -47,7 +47,7 @@
       <div class="col-lg-8 mb-4 mb-lg-0">
         <div class="d-flex align-items-center">
           <div class="border p-2 d-inline-block mr-3 rounded">
-            <img src="{% static 'images/job_logo_2.jpg' %}" alt="Image">
+            <img style="width: 150px; height: 150px;" src="{{job.company_image.url}}" alt="Image">
           </div>
           <div>
             <h2>{{ job.title }}</h2>

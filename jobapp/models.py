@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_init
 from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.conf import settings
@@ -37,7 +37,7 @@ class Job(models.Model):
     salary = models.CharField(max_length=30, blank=True)
     company_name = models.CharField(max_length=300)
     company_description = RichTextField(blank=True, null=True)
-    # company_image = models.ImageField(blank=True, null=True, verbose_name='Company Image', upload_to='companyImage', default='profileImages/no-profile-picture-icon.webp')
+    company_image = models.ImageField(blank=True, null=True, verbose_name='Company Image', upload_to='companyImage', default='profileImages/no-profile-picture-icon.webp')
     url = models.URLField(max_length=200)
     last_date = models.DateField()
     is_published = models.BooleanField(default=False)
@@ -48,20 +48,25 @@ class Job(models.Model):
         return self.title
 
 
+@receiver(post_init, sender=Job)
+def remember_previous_state(sender, instance, **kwargs):
+	instance.previous_state = instance.is_published
+
 @receiver(post_save, sender=Job)
 def send_notifcation(sender, instance, **kwargs):
-	if instance.is_published:
-		users = User.objects.filter(category=instance.category).values()
+	if instance.previous_state != instance.is_published:
+		if instance.is_published:
+			users = User.objects.filter(category=instance.category).values()
 
-		for singleuser in list(users):
-			message = f"Hello {singleuser.get('first_name')} {singleuser.get('last_name')}! you might want to take a look at this newly posted job: {instance.title} located in {instance.location}."
-			send_mail(
-				'New job posted on JobApp200',
-				message,
-				settings.EMAIL_HOST_USER,
-				[singleuser.get('email')],
-				fail_silently=False,
-			)
+			for singleuser in list(users):
+				message = f"Hello {singleuser.get('first_name')} {singleuser.get('last_name')}! you might want to take a look at this newly posted job: {instance.title} located in {instance.location}."
+				send_mail(
+					'New job posted on JobApp200',
+					message,
+					settings.EMAIL_HOST_USER,
+					[singleuser.get('email')],
+					fail_silently=False,
+				)
  
 
 class Applicant(models.Model):

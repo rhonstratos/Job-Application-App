@@ -119,15 +119,17 @@ class JobBookmarkForm(forms.ModelForm):
 class JobEditForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
+		
+        companyImage = forms.ImageField()
         forms.ModelForm.__init__(self, *args, **kwargs)
-        self.fields['title'].label = "Job Title :"
-        self.fields['location'].label = "Job Location :"
-        self.fields['salary'].label = "Salary :"
-        self.fields['description'].label = "Job Description :"
+        self.fields['title'].label = "Job Title "
+        self.fields['location'].label = "Job Location "
+        self.fields['salary'].label = "Salary "
+        self.fields['description'].label = "Job Description "
         # self.fields['tags'].label = "Tags :"
-        self.fields['last_date'].label = "Dead Line :"
-        self.fields['company_name'].label = "Company Name :"
-        self.fields['url'].label = "Website :"
+        self.fields['last_date'].label = "Dead Line "
+        self.fields['company_name'].label = "Company Name "
+        self.fields['url'].label = "Website "
 
 
         self.fields['title'].widget.attrs.update(
@@ -152,7 +154,7 @@ class JobEditForm(forms.ModelForm):
         # )                        
         self.fields['last_date'].widget.attrs.update(
             {
-                'placeholder': 'YYYY-MM-DD ',
+                'placeholder': 'YYYY-MM-DD',
             }
         )        
         self.fields['company_name'].widget.attrs.update(
@@ -183,6 +185,7 @@ class JobEditForm(forms.ModelForm):
             "salary",
             "description",
             "last_date",
+			"company_image",
             "company_name",
             "company_description",
             "url"
