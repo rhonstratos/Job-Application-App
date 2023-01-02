@@ -75,7 +75,7 @@
                     {% if field.name == 'job_type'  %}
                         <div class="form-group">
                         <label for="job-type">Job Type</label>
-                        <select name="job_type" class="selectpicker border rounded" id="job-type" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Job Type">
+                        <select name="job_type" class=" border rounded" id="job-type" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Job Type">
                               <option value="1">Full time</option>
                               <option value="2">Part time</option>
                               <option value="3" {% if form.type.value == "3" %} selected {% endif %}>Internship</option>
@@ -85,7 +85,7 @@
                     {% elif field.name == 'category' %}
                         <div class="form-group">
                         <label for="job-type">Category</label>
-                        <select name="category" class="selectpicker border rounded" id="job-type" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Job Type">
+                        <select name="category" class=" border rounded" id="job-type" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Job Type">
                               
                               {% for category in categories %}
                               
