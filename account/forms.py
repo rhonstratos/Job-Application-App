@@ -5,7 +5,6 @@ from django.contrib.auth.forms import PasswordChangeForm
 
 from account.models import User
 
-
 class EmployeeRegistrationForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
@@ -56,14 +55,26 @@ class EmployeeRegistrationForm(UserCreationForm):
                 'placeholder': 'Enter Last Name',
             }
         )
+        self.fields['category'].widget.attrs.update(
+            {
+                'placeholder': 'Enter Last Name',
+            }
+        )
         resume = forms.FileField(widget=forms.FileInput(attrs={'accept':'application/pdf'}))
 
     class Meta:
 
         model = User
 
-        fields = ['username', 'email', 'password1', 'password2', 'phoneNumber',
+        fields = ['username', 'email', 'password1', 'password2', 'phoneNumber', "category",
 				'first_name', 'last_name', 'gender', 'resume']
+	
+    def clean_category(self):
+        category = self.cleaned_data.get('category')
+
+        if not category:
+            raise forms.ValidationError("category is required")
+        return category
 
     def clean_gender(self):
         gender = self.cleaned_data.get('gender')
@@ -217,7 +228,7 @@ class EmployeeProfileEditForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ["profilePicture", "username", "email", "phoneNumber", "first_name", "last_name", "gender", "resume"]
+        fields = ["profilePicture", "username", "email", "phoneNumber", "category", "first_name", "last_name", "gender", "resume"]
 
 
 class EmployeeChangePassword(PasswordChangeForm):

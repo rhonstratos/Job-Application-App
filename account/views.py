@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect , get_object_or_404
 from django.urls import reverse, reverse_lazy
 
 from account.forms import *
+from jobapp.models import *
 from jobapp.permission import user_is_employee 
 
 
@@ -28,13 +29,15 @@ def employee_registration(request):
     Handle Employee Registration
 
     """
+    categories = Category.objects.all()
     form = EmployeeRegistrationForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form = form.save()
         return redirect('account:login')
     context={
         
-            'form':form
+            'form':form,
+			'categories': categories
         }
 
     return render(request,'account/employee-registration.html',context)
@@ -69,6 +72,7 @@ def employee_edit_profile(request, id=id):
     """
 
     user = get_object_or_404(User, id=id)
+    categories = Category.objects.all()
     form = EmployeeProfileEditForm(request.POST or None, request.FILES or None, instance=user)
     if form.is_valid():
         form = form.save()
@@ -78,7 +82,8 @@ def employee_edit_profile(request, id=id):
                                     }))
     context={
 			'user':user,
-            'form':form
+            'form':form,
+			'categories': categories
         }
 
     return render(request,'account/employee-edit-profile.html',context)
