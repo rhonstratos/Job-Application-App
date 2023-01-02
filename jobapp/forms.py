@@ -25,22 +25,22 @@ class JobForm(forms.ModelForm):
 
         self.fields['title'].widget.attrs.update(
             {
-                'placeholder': 'eg : Software Developer',
+                'placeholder': 'eg : Web Developer',
             }
         )        
         self.fields['location'].widget.attrs.update(
             {
-                'placeholder': 'eg : Bangladesh',
+                'placeholder': 'eg : Metro Manila',
             }
         )
         self.fields['salary'].widget.attrs.update(
             {
-                'placeholder': '$800 - $1200',
+                'placeholder': 'Php30000 - Php50000',
             }
         )
         self.fields['tags'].widget.attrs.update(
             {
-                'placeholder': 'Use comma separated. eg: Python, JavaScript ',
+                'placeholder': 'Separate it by comma: eg: HTML, CSS, JS ',
             }
         )                        
         self.fields['last_date'].widget.attrs.update(
