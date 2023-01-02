@@ -60,11 +60,11 @@ class UserAdmin(BaseUserAdmin):
     form = UpdateUserForm
     add_form = AddUserForm
 
-    list_display = ('username', 'email', 'phoneNumber','first_name', 'last_name', 'role', 'profilePicture')
+    list_display = ('username', 'email', 'phoneNumber','first_name', 'last_name', 'role')
     list_filter = ('is_staff', )
     fieldsets = (
         (None, {'fields': ('username', 'email', 'password', )}),
-        ('Personal info', {'fields': ('first_name', 'last_name', 'profilePicture', 'gender', 'role', )}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'profilePicture', 'gender', 'role', 'resume')}),
         ('Permissions', {'fields': ('is_active', 'is_staff')}),
     )
     add_fieldsets = (
@@ -73,7 +73,7 @@ class UserAdmin(BaseUserAdmin):
             {
                 'classes': ('wide',),
                 'fields': (
-                    'username', 'email', 'password1', 'password2', 'first_name', 'last_name', 'profilePicture', 'gender', 'role', 
+                    'username', 'email', 'password1', 'password2', 'first_name', 'last_name', 'profilePicture', 'gender', 'role', 'resume'
                 )
             }
         ),
