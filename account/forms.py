@@ -7,17 +7,38 @@ from account.models import User
 
 class EmployeeRegistrationForm(UserCreationForm):
 
-
     def __init__(self, *args, **kwargs):
         UserCreationForm.__init__(self, *args, **kwargs)
         self.fields['gender'].required = True
-        self.fields['first_name'].label = "First Name :"
-        self.fields['last_name'].label = "Last Name :"
-        self.fields['password1'].label = "Password :"
-        self.fields['password2'].label = "Confirm Password :"
-        self.fields['email'].label = "Email :"
-        self.fields['gender'].label = "Gender :"
+        self.fields['username'].label = "Username"
+        self.fields['email'].label = "Email"
+        self.fields['first_name'].label = "First Name"
+        self.fields['last_name'].label = "Last Name"
+        self.fields['password1'].label = "Password"
+        self.fields['password2'].label = "Confirm Password"
+        self.fields['gender'].label = "Gender"
 
+        profilePicture = forms.ImageField()
+        self.fields['username'].widget.attrs.update(
+            {
+                'placeholder': 'Enter Username',
+            }
+        )
+        self.fields['email'].widget.attrs.update(
+            {
+                'placeholder': 'Enter Email',
+            }
+        )
+        self.fields['password1'].widget.attrs.update(
+            {
+                'placeholder': 'Enter Password',
+            }
+        )
+        self.fields['password2'].widget.attrs.update(
+            {
+                'placeholder': 'Confirm Password',
+            }
+        )
         self.fields['first_name'].widget.attrs.update(
             {
                 'placeholder': 'Enter First Name',
@@ -28,6 +49,45 @@ class EmployeeRegistrationForm(UserCreationForm):
                 'placeholder': 'Enter Last Name',
             }
         )
+
+    class Meta:
+
+        model = User
+
+        fields = ['profilePicture', 'username', 'email', 'password1', 'password2', 
+				'first_name', 'last_name', 'gender']
+
+    def clean_gender(self):
+        gender = self.cleaned_data.get('gender')
+        if not gender:
+            raise forms.ValidationError("Gender is required")
+        return gender
+
+    def save(self, commit=True):
+        user = UserCreationForm.save(self, commit=False)
+        user.role = "employee"
+        if commit:
+            user.save()
+        return user
+
+
+class EmployerRegistrationForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        UserCreationForm.__init__(self, *args, **kwargs)
+        self.fields['username'].label = "Username"
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
+        self.fields['first_name'].label = "Company Name"
+        self.fields['last_name'].label = "Company Address"
+        self.fields['password1'].label = "Password"
+        self.fields['password2'].label = "Confirm Password"
+
+        profilePicture = forms.ImageField()
+        self.fields['username'].widget.attrs.update(
+            {
+                'placeholder': 'Enter Username',
+            }
+        )
         self.fields['email'].widget.attrs.update(
             {
                 'placeholder': 'Enter Email',
@@ -43,37 +103,6 @@ class EmployeeRegistrationForm(UserCreationForm):
                 'placeholder': 'Confirm Password',
             }
         )
-
-    class Meta:
-
-        model=User
-
-        fields = ['first_name', 'last_name', 'email', 'password1', 'password2', 'gender']
-
-    def clean_gender(self):
-        gender = self.cleaned_data.get('gender')
-        if not gender:
-            raise forms.ValidationError("Gender is required")
-        return gender
-
-    def save(self, commit=True):
-        user = UserCreationForm.save(self,commit=False)
-        user.role = "employee"
-        if commit:
-            user.save()
-        return user
-
-
-class EmployerRegistrationForm(UserCreationForm):
-    def __init__(self, *args, **kwargs):
-        UserCreationForm.__init__(self, *args, **kwargs)
-        self.fields['first_name'].required = True
-        self.fields['last_name'].required = True
-        self.fields['first_name'].label = "Company Name"
-        self.fields['last_name'].label = "Company Address"
-        self.fields['password1'].label = "Password"
-        self.fields['password2'].label = "Confirm Password"
-
         self.fields['first_name'].widget.attrs.update(
             {
                 'placeholder': 'Enter Company Name',
@@ -84,30 +113,16 @@ class EmployerRegistrationForm(UserCreationForm):
                 'placeholder': 'Enter Company Address',
             }
         )
-        self.fields['email'].widget.attrs.update(
-            {
-                'placeholder': 'Enter Email',
-            }
-        )
-        self.fields['password1'].widget.attrs.update(
-            {
-                'placeholder': 'Enter Password',
-            }
-        )
-        self.fields['password2'].widget.attrs.update(
-            {
-                'placeholder': 'Confirm Password',
-            }
-        )
+
     class Meta:
 
-        model=User
+        model = User
 
-        fields = ['first_name', 'last_name', 'email', 'password1', 'password2',]
-
+        fields = ['profilePicture', 'username',  'email', 'password1', 
+			'password2', 'first_name', 'last_name',]
 
     def save(self, commit=True):
-        user = UserCreationForm.save(self,commit=False)
+        user = UserCreationForm.save(self, commit=False)
         user.role = "employer"
         if commit:
             user.save()
@@ -115,12 +130,11 @@ class EmployerRegistrationForm(UserCreationForm):
 
 
 class UserLoginForm(forms.Form):
-    email =  forms.EmailField(
-    widget=forms.EmailInput(attrs={ 'placeholder':'Email',})
-) 
-    password = forms.CharField(strip=False,widget=forms.PasswordInput(attrs={
-        
-        'placeholder':'Password',
+    email = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Email or username', })
+    )
+    password = forms.CharField(strip=False, widget=forms.PasswordInput(attrs={
+        'placeholder': 'Password',
     }))
 
     def clean(self, *args, **kwargs):
@@ -128,9 +142,16 @@ class UserLoginForm(forms.Form):
         password = self.cleaned_data.get("password")
 
         if email and password:
-            self.user = authenticate(email=email, password=password)
+            if '@' in email:
+                usernameStr = str(User.objects.get(email=email).username)
+                self.user = authenticate(username=usernameStr, password=password)
+            else:
+                self.user = authenticate(username=email, password=password)
             try:
-                user = User.objects.get(email=email)
+                if '@' in email:
+                    user = User.objects.get(username=usernameStr)
+                else:
+                    user = User.objects.get(username=email)
             except User.DoesNotExist:
                 raise forms.ValidationError("User Does Not Exist.")
 
@@ -146,11 +167,12 @@ class UserLoginForm(forms.Form):
         return self.user
 
 
-
 class EmployeeProfileEditForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(EmployeeProfileEditForm, self).__init__(*args, **kwargs)
+		
+        profilePicture = forms.ImageField()
         self.fields['first_name'].widget.attrs.update(
             {
                 'placeholder': 'Enter First Name',
@@ -164,4 +186,4 @@ class EmployeeProfileEditForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "gender"]
+        fields = ["profilePicture", "first_name", "last_name", "gender"]

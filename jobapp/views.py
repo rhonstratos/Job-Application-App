@@ -16,9 +16,7 @@ from jobapp.models import *
 from jobapp.permission import *
 User = get_user_model()
 
-
 def home_view(request):
-
     published_jobs = Job.objects.filter(is_published=True).order_by('-timestamp')
     jobs = published_jobs.filter(is_closed=False)
     total_candidates = User.objects.filter(role='employee').count()
@@ -43,6 +41,7 @@ def home_view(request):
             prev_page_number = page_obj.previous_page_number()
 
         data={
+			'user':user,
             'job_lists':job_lists,
             'current_page_no':page_obj.number,
             'next_page_number':next_page_number,

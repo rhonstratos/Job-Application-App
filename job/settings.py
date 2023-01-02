@@ -90,20 +90,23 @@ WSGI_APPLICATION = 'job.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': 'django_job_app_dev',
-        # 'USER': 'root',
-        # 'PASSWORD': 'root',
-        # 'HOST': 'localhost',
-        # 'PORT': '3306',
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ["PGDATABASE"],
-        'USER': os.environ["PGUSER"],
-        'PASSWORD': os.environ["PGPASSWORD"],
-        'HOST': os.environ["PGHOST"],
-        'PORT': os.environ["PGPORT"],
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django_job_app_dev',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': os.environ["PGDATABASE"],
+        # 'USER': os.environ["PGUSER"],
+        # 'PASSWORD': os.environ["PGPASSWORD"],
+        # 'HOST': os.environ["PGHOST"],
+        # 'PORT': os.environ["PGPORT"],
     }
 }
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # DATABASES = {
 #     'default': {
@@ -176,7 +179,7 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 AUTH_USER_MODEL = 'account.User'
 
@@ -203,3 +206,5 @@ MESSAGE_TAGS = {
 # django_heroku.settings(locals())
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
