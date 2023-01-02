@@ -57,8 +57,9 @@
         </div>
         {% endfor %}
         {% endif %}
-        <form method="POST" class="p-4 border rounded">
+        <form method="POST" enctype="multipart/form-data" class="p-4 border rounded">
           {% csrf_token %}
+		  <img style="width: 100%;" src="{{user.profilePicture.url}}" />
           {% for field in form %}
           {% if field.name == 'gender' %}
           <div class="row form-group mb-4">

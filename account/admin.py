@@ -60,11 +60,11 @@ class UserAdmin(BaseUserAdmin):
     form = UpdateUserForm
     add_form = AddUserForm
 
-    list_display = ('username', 'email', 'phoneNumber','first_name', 'last_name', 'gender', 'role', 'is_staff')
+    list_display = ('username', 'email', 'phoneNumber','first_name', 'last_name', 'role', 'profilePicture')
     list_filter = ('is_staff', )
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name', 'gender', 'role', )}),
+        (None, {'fields': ('username', 'email', 'password', )}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'profilePicture', 'gender', 'role', )}),
         ('Permissions', {'fields': ('is_active', 'is_staff')}),
     )
     add_fieldsets = (
@@ -73,14 +73,13 @@ class UserAdmin(BaseUserAdmin):
             {
                 'classes': ('wide',),
                 'fields': (
-                    'email', 'first_name', 'last_name', 'gender', 'role', 'password1',
-                    'password2'
+                    'username', 'email', 'password1', 'password2', 'first_name', 'last_name', 'profilePicture', 'gender', 'role', 
                 )
             }
         ),
     )
-    search_fields = ('email', 'first_name', 'last_name')
-    ordering = ('email', 'first_name', 'last_name')
+    search_fields = ('username', 'email', 'first_name', 'last_name')
+    ordering = ('username', 'email', 'first_name', 'last_name')
     filter_horizontal = ()
 
 
