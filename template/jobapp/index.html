@@ -514,8 +514,7 @@
       <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
         <a href="{% url 'jobapp:single-job' job.id %}"></a>
         <div class="job-listing-logo">
-          <img src="{% static 'images/i.jpg' %}" alt="Free Website Template by Free-Template.co"
-            class="img-fluid">
+			<img class="img-fluid" style="width: 150px; height: 150px;" src="{{job.company_image.url}}" alt="">
         </div>
 
         <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
