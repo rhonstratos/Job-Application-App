@@ -208,3 +208,8 @@ MESSAGE_TAGS = {
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+
+#settings.py
+if DEBUG:
+    import mimetypes
+    mimetypes.add_type("application/javascript", ".js", True)
