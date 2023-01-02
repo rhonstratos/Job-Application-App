@@ -9,8 +9,6 @@ from django.http import Http404, HttpResponseRedirect, JsonResponse
 from django.core.serializers import serialize
 from django.views.decorators.cache import cache_page
 from django.core.cache import cache
-from django.core.mail import send_mail
-from django.conf import settings
 
 from account.models import User
 from jobapp.forms import *
