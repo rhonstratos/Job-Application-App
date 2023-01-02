@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base-landing.html' %}
 {% load static %}
 
 
@@ -78,6 +78,67 @@
   <h2>HTTP status code “200”: Job Found! Join, Work And Succeed</h2>
   <a href="#header" class="btn-get-started scrollto scroll-button smoothscroll"><i class="bi bi-chevron-double-down"></i></a>
 </section><!-- End Hero -->
+
+ <!-- ======= Header ======= -->
+ <header id="header" class="d-flex align-items-center">
+  <div class="container d-flex align-items-center justify-content-between">
+
+    <div class="logo">
+      <!-- <h1><a href="index.html">JobApp<span>200</span></a></h1> -->
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <a href="{% url 'jobapp:home' %}"><img src="static/images/job app 200-transparent.png" alt="" class="img-fluid"></a>
+    </div>
+
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+        <li><a class="nav-link scrollto scroll-button smoothscroll" href="#about">About</a></li>
+        <li><a class="nav-link scrollto scroll-button smoothscroll" href="#home-section">Job Search</a></li>
+        <li><a class="nav-link scrollto" href="{% url 'jobapp:job-list' %}">Job Listings</a></li>
+        <li><a class="nav-link scrollto scroll-button smoothscroll" href="#team">Team</a></li>
+        <li><a class="nav-link scrollto scroll-button smoothscroll" href="#faq">FAQ</a></li>
+        <li><a class="nav-link scrollto scroll-button smoothscroll" href="#contact">Contact</a></li>
+
+        {% if user.is_authenticated and user.role == 'employer'  %}
+        <li><a class="nav-link scrollto" href="{% url 'jobapp:create-job' %}">Publish Job</a></li>
+        <li class="dropdown"><a href="#"><span>Dashboard</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="{% url 'jobapp:dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'account:logout' %}">Logout</a></li>
+          </ul>
+        </li>
+
+        {% elif user.is_authenticated %}
+        <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="{% url 'account:edit-profile' request.user.id %}">Edit Settings</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a href="#"><span>Dashboard</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="{% url 'jobapp:dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'account:logout' %}">Logout</a></li>
+          </ul>
+        </li>
+
+        {% else %}
+
+        <li class="dropdown"><a href="#"><span>Sign Up</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="{% url 'account:employer-registration' %}">Job Provider</a></li>
+            <li><a href="{% url 'account:employee-registration' %}">Job Seeker</a></li>
+          </ul>
+        </li>
+        <li><a class="nav-link scrollto" href="{% url 'account:login' %}">Sign In</a></li>
+
+        {% endif %}
+
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+  </div>
+</header><!-- End Header -->
 
 <!-- ======= About Section ======= -->
 <section id="about" class="about">
@@ -434,6 +495,8 @@
   </div>
 </section><!-- End F.A.Q Section -->
 
+<a href="#hero" class="back-to-top d-flex align-items-center justify-content-center scrollto scroll-button smoothscroll"><i class="bi bi-arrow-up-short"></i></a>
+
 
 <section id="ajax_listing_paginattion" class="site-section">
   <div class="container">
@@ -564,6 +627,8 @@
   <!-- </div>
 
 </section> -->
+
+
 
 
 {% endblock %}
