@@ -28,7 +28,7 @@ def employee_registration(request):
     Handle Employee Registration
 
     """
-    form = EmployeeRegistrationForm(request.POST or None, request.FILES)
+    form = EmployeeRegistrationForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form = form.save()
         return redirect('account:login')
@@ -47,7 +47,7 @@ def employer_registration(request):
 
     """
 
-    form = EmployerRegistrationForm(request.POST or None, request.FILES)
+    form = EmployerRegistrationForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form = form.save()
         return redirect('account:login')
@@ -69,7 +69,7 @@ def employee_edit_profile(request, id=id):
     """
 
     user = get_object_or_404(User, id=id)
-    form = EmployeeProfileEditForm(request.POST or None, request.FILES, instance=user)
+    form = EmployeeProfileEditForm(request.POST or None, request.FILES or None, instance=user)
     if form.is_valid():
         form = form.save()
         messages.success(request, 'Your Profile Was Successfully Updated!')
