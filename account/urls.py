@@ -11,6 +11,7 @@ urlpatterns = [
     # employee url
     path('employee/register/', views.employee_registration, name='employee-registration'),
     path('profile/edit/<int:id>/', views.employee_edit_profile, name='edit-profile'),
+    path('profile/edit/password/<int:id>/', views.employee_edit_password, name='employee-edit-password'),
 
     # general url
     path('login/', views.user_logIn, name='login'),

@@ -40,15 +40,12 @@
           <div class="col-lg-3 mr-auto">
             <div class="border p-4 rounded">
               <ul class="list-unstyled block__47528 mb-0">
-                <li><span class="active">Graphic Design</span></li>
-                <li><a href="#">Topic 1</a></li>
-                <li><a href="#">Topic 2</a></li>
-          
+                <a href="{{applicant.resume.url}}">View Resume</a>
               </ul>
             </div>
           </div>
           <div class="col-lg-8">
-            <span class="text-primary d-block mb-5"><span class="icon-magnet display-1"></span></span>
+			<img src="{{applicant.profilePicture.url}}" alt="">
             <h2 class="mb-4">{{ applicant.get_full_name }}</h2>
             <p><h3>Email :</h3>{{ applicant.email }}</p>
             <p><h3>Gender :</h3>
