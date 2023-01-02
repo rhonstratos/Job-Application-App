@@ -4,10 +4,15 @@ from account import views
 app_name = "account"
 
 urlpatterns = [
-
-    path('employee/register/', views.employee_registration, name='employee-registration'),
+    # employer url
     path('employer/register/', views.employer_registration, name='employer-registration'),
+    path('employer/edit/<int:id>/', views.employer_edit_profile, name='employer-profile'),
+
+    # employee url
+    path('employee/register/', views.employee_registration, name='employee-registration'),
     path('profile/edit/<int:id>/', views.employee_edit_profile, name='edit-profile'),
+
+    # general url
     path('login/', views.user_logIn, name='login'),
     path('logout/', views.user_logOut, name='logout'),
 ]
