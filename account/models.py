@@ -4,9 +4,14 @@ from ckeditor.fields import RichTextField
 
 from account.managers import CustomUserManager
 
-JOB_TYPE = (
+GENDER = (
     ('M', "Male"),
     ('F', "Female"),
+)
+
+NOTIFY_MODE = (
+    ('email', "Via email"),
+    ('phone_number', "Via phone number"),
 )
 
 ROLE = (
@@ -17,9 +22,11 @@ ROLE = (
 class User(AbstractUser):
     username = models.CharField(max_length=40, unique=True, verbose_name="username", blank=False, error_messages={'unique': "A user with that username already exists.",})
     email = models.EmailField(unique=True, blank=False, error_messages={'unique': "A user with that email already exists.",})
-    phoneNumber = models.CharField(max_length=20, default='-', verbose_name='phone number', blank=False)
+    phoneNumber = models.CharField(max_length=20, default='-', verbose_name='Phone Number', blank=False)
     role = models.CharField(choices=ROLE, max_length=10)
-    gender = models.CharField(choices=JOB_TYPE, max_length=1)
+    gender = models.CharField(choices=GENDER, max_length=1)
+    updateViaEmail = models.BooleanField(default=True, verbose_name='Update via email')
+    updateViaPhoneNumber = models.BooleanField(default=False, verbose_name='Update via phone number')
     skills = models.TextField(blank=True, null=True)
     qualifications = models.TextField(blank=True, null=True)
     experiences = models.TextField(blank=True, null=True)

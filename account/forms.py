@@ -249,7 +249,7 @@ class EmployeeProfileEditForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ["profilePicture", "username", "email", "phoneNumber", "category", "first_name",
+        fields = ["profilePicture", "username", "email", "phoneNumber", "updateViaEmail", "updateViaPhoneNumber", "category", "first_name",
 					"last_name", "gender", 'skills', 'qualifications', 'experiences', "resume"]
         widgets = {
 			'skills': forms.Textarea(attrs={'placeholder': 'Enter your skills'}),
