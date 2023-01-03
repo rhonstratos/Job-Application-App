@@ -47,7 +47,7 @@
       <div class="col-lg-8 mb-4 mb-lg-0">
         <div class="d-flex align-items-center">
           <div class="border p-2 d-inline-block mr-3 rounded">
-            <img style="width: 150px; height: 150px;" src="{{job.company_image.url}}" alt="Image">
+            <img style="width: 150px; height: 150px; object-fit: cover;" src="{{job.company_image.url}}" alt="Image">
           </div>
           <div>
             <h2>{{ job.title }}</h2>
@@ -124,7 +124,7 @@
 
           <a href="{% url 'jobapp:edit-job' job.id %}" class="btn btn-block btn-light btn-md">Edit</a>
            {% else %}
-              <a href="{% url 'jobapp:create-job' %}" class="btn btn-block btn-primary btn-md">Publish Your Job</a>
+              <a href="{% url 'jobapp:create-job' %}" class="btn btn-block btn-primary btn-md make-round">Publish Your Job</a>
             {% endif %}
 
           </div>

@@ -34,14 +34,15 @@
   </div>
 </section><!-- End Breadcrumbs Section -->
 
-<section class="site-section services-section block__62849" id="next-section">
+<section class="bg-section block__62849" id="next-section">
   <div class="container">
 
     <div class="row">
       {% for job in page_obj %}
       <div class="col-6 col-md-6 col-lg-4 mb-4 mb-lg-5">
-        <a href="{% url 'jobapp:single-job' job.id %}" class="block__16443 min-h text-center d-block">
-          <span class="custom-icon mx-auto"><span class="icon-magnet d-block"></span></span>
+        <a href="{% url 'jobapp:single-job' job.id %}" class="block__16443 rounded shadow-container min-h text-center d-block">
+          <!-- <span class="custom-icon mx-auto"><span class="icon-magnet d-block"></span></span> -->
+          <img style="width:150px; height:150px; border-style: solid; border-color: #fcf2f7; margin-bottom: 10px; border-width: 15px;" class="rounded-circle mx-auto d-block" src="{{job.company_image.url}}" />
           <h3>{{ job.title }}</h3>
           <ul class="job-listing-meta list-unstyled pl-3 mb-0">
             <li class="menu-fix mb-2">
@@ -60,7 +61,7 @@
               {% endif %}</li>
             <li class="badge badge-secondary menu-fix mb-2"> {{ job.location }}</li>
           </ul>
-          <p>{{ job.description | safe | truncatechars:100}}</p>
+          <!-- <p>{{ job.description | safe | truncatechars:100}}</p> -->
         </a>
       </div>
       {% endfor %}
