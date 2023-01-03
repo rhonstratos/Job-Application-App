@@ -131,7 +131,7 @@ def edit_password(request, id=id):
 
     instance_user = get_object_or_404(User, id=int(id))
     form_edit_password = ChangePassword(instance_user, data=request.POST or None)
-    form = EmployerProfileEditForm(request.POST or None, instance=user)
+    form = EmployerProfileEditForm(request.POST or None, instance=instance_user)
 
     if form_edit_password.is_valid():
        form_edit_password.save()
