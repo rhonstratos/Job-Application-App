@@ -60,14 +60,24 @@ class EmployeeRegistrationForm(UserCreationForm):
                 'placeholder': 'Enter Last Name',
             }
         )
-        resume = forms.FileField(widget=forms.FileInput(attrs={'accept':'application/pdf'}))
+        skills = forms.Textarea()
+        qualifications = forms.Textarea()
+        experiences = forms.Textarea()
+        resume = forms.FileField()
 
     class Meta:
 
         model = User
 
         fields = ['username', 'email', 'password1', 'password2', 'phoneNumber', "category",
-				'first_name', 'last_name', 'gender', 'resume']
+				'first_name', 'last_name', 'gender', 'skills', 'qualifications', 'experiences', 'resume']
+
+        widgets = {
+			'skills': forms.Textarea(attrs={'placeholder': 'Enter your skills'}),
+			'qualifications': forms.Textarea(attrs={'placeholder': 'Enter your qualifications'}),
+			'experiences': forms.Textarea(attrs={'placeholder': 'Share your experiences'}),
+			'resume': forms.FileInput(attrs={'accept':'application/pdf'}),
+        }
 	
     def clean_category(self):
         category = self.cleaned_data.get('category')
@@ -101,7 +111,6 @@ class EmployerRegistrationForm(UserCreationForm):
         self.fields['password1'].label = "Password"
         self.fields['password2'].label = "Confirm Password"
 
-        profilePicture = forms.ImageField()
         self.fields['username'].widget.attrs.update(
             {
                 'placeholder': 'Enter Username',
@@ -143,7 +152,7 @@ class EmployerRegistrationForm(UserCreationForm):
 
         model = User
 
-        fields = ['profilePicture', 'username',  'email', 'phoneNumber', 'password1', 
+        fields = ['username',  'email', 'phoneNumber', 'password1', 
 			'password2', 'first_name', 'last_name',]
 
     def save(self, commit=True):
@@ -224,11 +233,22 @@ class EmployeeProfileEditForm(forms.ModelForm):
                 'placeholder': 'Enter Last Name',
             }
         )
-        resume = forms.FileField(widget=forms.FileInput(attrs={'accept':'application/pdf'}))
+		
+        skills = forms.Textarea()
+        qualifications = forms.Textarea()
+        experiences = forms.Textarea()
+        resume = forms.FileField()
 
     class Meta:
         model = User
-        fields = ["profilePicture", "username", "email", "phoneNumber", "category", "first_name", "last_name", "gender", "resume"]
+        fields = ["profilePicture", "username", "email", "phoneNumber", "category", "first_name",
+					"last_name", "gender", 'skills', 'qualifications', 'experiences', "resume"]
+        widgets = {
+			'skills': forms.Textarea(attrs={'placeholder': 'Enter your skills'}),
+			'qualifications': forms.Textarea(attrs={'placeholder': 'Enter your qualifications'}),
+			'experiences': forms.Textarea(attrs={'placeholder': 'Share your experiences'}),
+			'resume': forms.FileInput(attrs={'accept':'application/pdf'}),
+        }
 
 
 class EmployeeChangePassword(PasswordChangeForm):

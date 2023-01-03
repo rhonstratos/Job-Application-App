@@ -105,6 +105,14 @@
 			  </select>
             </div>
           </div>
+		  {% elif field.name == 'skills' or  field.name == 'qualifications' or field.name == 'experiences'%}
+		  <div class="row form-group">
+            <div class="col-md-12 mb-3 mb-md-0">
+              <label class="text-black" for="id_{{ field.name }}">{{ field.label }}</label>
+				<textarea style="resize: none;" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}" rows="4"
+					placeholder="{{ field.field.widget.attrs.placeholder }}">{{ field.value }}</textarea>
+            </div>
+          </div>
           {% elif field.name == 'resume' %}
 
           <div class="row form-group">

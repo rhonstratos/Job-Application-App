@@ -84,24 +84,12 @@ def create_job_View(request):
     """
     Provide the ability to create job post
     """
-    form = JobForm(request.POST or None)
+    form = JobForm(request.POST or None, request.FILES or None)
 
     user = get_object_or_404(User, id=request.user.id)
     categories = Category.objects.all()
     if request.method == 'POST':
         if form.is_valid():
-            users = User.objects.filter(category=form['category'].value()).values()
-
-            for singleuser in list(users):
-                message = f"Hello {singleuser.get('first_name')} {singleuser.get('last_name')}! you might want to take a look at this newly posted job: {form['title'].value()} located in {form['location'].value()}."
-                send_mail(
-					'New job posted on JobApp200',
-					message,
-					settings.EMAIL_HOST_USER,
-					[singleuser.get('email')],
-					fail_silently=False,
-				)
-
             instance = form.save(commit=False)
             instance.user = user
             instance.save()

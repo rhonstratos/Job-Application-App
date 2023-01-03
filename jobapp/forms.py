@@ -13,6 +13,7 @@ class JobForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
         forms.ModelForm.__init__(self, *args, **kwargs)
+        companyImage = forms.ImageField()
         self.fields['title'].label = "Job Title"
         self.fields['location'].label = "Job Location"
         self.fields['salary'].label = "Salary"
@@ -73,6 +74,7 @@ class JobForm(forms.ModelForm):
             "description",
             "tags",
             "last_date",
+			"company_image",
             "company_name",
             "company_description",
             "url"

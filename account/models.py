@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from ckeditor.fields import RichTextField
 
 from account.managers import CustomUserManager
 
@@ -19,6 +20,9 @@ class User(AbstractUser):
     phoneNumber = models.CharField(max_length=20, default='-', verbose_name='phone number', blank=False)
     role = models.CharField(choices=ROLE, max_length=10)
     gender = models.CharField(choices=JOB_TYPE, max_length=1)
+    skills = models.TextField(blank=True, null=True)
+    qualifications = models.TextField(blank=True, null=True)
+    experiences = models.TextField(blank=True, null=True)
     profilePicture = models.ImageField(blank=True, null=True, verbose_name='Profile Picture', upload_to='profileImages', default='profileImages/no-profile-picture-icon.webp')
     resume = models.FileField(upload_to='resumes', blank=True, null=True, verbose_name='Resume')
     category = models.ForeignKey('jobapp.Category',related_name='Category_user', on_delete=models.CASCADE, null=True, blank=True)

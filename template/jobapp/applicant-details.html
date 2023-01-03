@@ -48,6 +48,7 @@
 			<img src="{{applicant.profilePicture.url}}" alt="">
             <h2 class="mb-4">{{ applicant.get_full_name }}</h2>
             <p><h3>Email :</h3>{{ applicant.email }}</p>
+            <p><h3>Phone Number :</h3>{{ applicant.phoneNumber }}</p>
             <p><h3>Gender :</h3>
                 {% if applicant.gender == 'M' %}
                     Male
@@ -55,6 +56,9 @@
                     Female
                 {% endif %}
             </p>
+            <p><h3>Skills :</h3>{{ applicant.skills }}</p>
+            <p><h3>Qualifications :</h3>{{ applicant.qualifications }}</p>
+            <p><h3>Experiences :</h3>{{ applicant.experiences }}</p>
             <p><a href="mailto:{{ applicant.email }}" class="btn btn-primary btn-md mt-4">Contact</a></p>
           </div>
         </div>
