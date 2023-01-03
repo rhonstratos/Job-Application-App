@@ -1,0 +1,70 @@
+* {
+    font-family: 'Poppins';
+}
+
+p {
+    font-family: 'Poppins';
+}
+
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+    background-color: #d43076 !important;
+    color: #fff;
+}
+
+.btn-info{
+    background-color: #d43076 !important;
+    border-color: #d43076 !important;
+}
+
+.btn-success {
+    background-color: #345676 !important;
+    border-color: #345676 !important;
+}
+
+.nav-header{
+    font-size: 0.8rem !important;
+}
+
+.card {
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.12) !important;
+    border-style: none !important;
+    border: 0px;
+}
+
+.content-wrapper {
+    background: linear-gradient(180deg, #f2f6f9 0%, #fff 100%) !important;
+}
+
+[class*=sidebar-dark-] {
+    background-color: #345676;
+}
+
+.main-footer b{
+    color: #ffff !important;
+}
+
+.accent-primary .btn-link, .accent-primary .nav-tabs .nav-link, .accent-primary a:not(.dropdown-item):not(.btn-app):not(.nav-link):not(.brand-link):not(.page-link):not(.btn) {
+    color: #d43076;
+}
+
+.info a{
+    color: #fff !important;
+}
+
+.timeline-item{
+    font-size: 13px !important;
+}
+
+.timeline>div>.timeline-item>.timeline-header>a {
+    font-size: 13px !important;
+}
+
+.btn-primary {
+    background-color: #d43076;
+    border-color: #d43076;
+}
+
+.btn-primary:hover {
+    background-color: #e4679d;
+    border-color: #e4679d;
+}

@@ -193,8 +193,12 @@ JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
     "site_title": "JobApp200 Admin",
 
+    "site_logo": 'images/jobapp200-icon.png',
+
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
     "site_header": "JobApp200",
+
+    "custom_css": "css/custom-admin.css",
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
     "site_brand": "JobApp200",
@@ -216,7 +220,7 @@ JAZZMIN_SETTINGS = {
 
     # Copyright on the footer
     "copyright": "JobApp200",
-
+    
 
 
 }
@@ -242,6 +246,7 @@ CKEDITOR_CONFIGS = {
 
     }
 }
+
 
 
 MESSAGE_TAGS = {
