@@ -88,7 +88,7 @@
                 {% endif %}
             
             {% elif request.user.id == job.user.id and  user.role == 'employer'  %}
-            <button onclick="call_sw_alert_func('{% url 'jobapp:delete' job.id %}','{{ job.id }}','Once Deleted, You Will Not be Able To Recover This Post!')" class="btn btn-block btn-danger btn-md">Delete</button>
+            <button onclick="call_sw_alert_func('{% url 'jobapp:delete' job.id %}','{{ job.id }}','Once Deleted, You Will Not be Able To Recover This Post!')" class="btn btn-block btn-danger make-round btn-md">Delete</button>
                                    
             {% comment %} {% else %}
 
@@ -122,7 +122,7 @@
             
           {% elif request.user.id == job.user.id and user.role == 'employer' %}
 
-          <a href="{% url 'jobapp:edit-job' job.id %}" class="btn btn-block btn-light btn-md">Edit</a>
+          <a href="{% url 'jobapp:edit-job' job.id %}" class="btn btn-block btn-light make-round btn-md">Edit</a>
            {% else %}
               <a href="{% url 'jobapp:create-job' %}" class="btn btn-block btn-primary btn-md make-round">Publish Your Job</a>
             {% endif %}
@@ -153,7 +153,7 @@
             {% if user.is_authenticated and user.role == 'employee' %}
             {% is_job_already_saved job request.user as is_saved %}
             {% if is_saved %}
-            <span class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>Already
+            <span class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger make-round"></span>Already
               Saved
               Job</span>
             {% else %}
@@ -168,7 +168,7 @@
             {% endif %}
 
             {% elif request.user.id == job.user.id and user.role == 'employer' %}
-            <button onclick="call_sw_alert_func('{% url 'jobapp:delete' job.id %}','{{ job.id }}','Once Deleted, You Will Not be Able To Recover This Post!')" class="btn btn-block btn-danger btn-md">Delete</button>
+            <button onclick="call_sw_alert_func('{% url 'jobapp:delete' job.id %}','{{ job.id }}','Once Deleted, You Will Not be Able To Recover This Post!')" class="btn btn-block btn-danger make-round btn-md">Delete</button>
                                    
            {% elif user.role == none %}
 
@@ -202,7 +202,7 @@
           {% elif  request.user.id == job.user.id and  user.role == 'employer' %}
           <div class="col-6">
 
-            <a href="{% url 'jobapp:edit-job' job.id %}" class="btn btn-block btn-light btn-md">Edit</a>
+            <a href="{% url 'jobapp:edit-job' job.id %}" class="btn btn-block btn-light btn-md make-round">Edit</a>
           </div>
           {% elif user.role == none %}
             <div class="col-6">
@@ -218,7 +218,7 @@
 
       </div>
       <div class="col-lg-4">
-        <div class="bg-light p-3 border rounded mb-4">
+        <div class="bg-light p-3 border rounded shadow-container mb-4">
           <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Job Summary</h3>
           <ul class="list-unstyled pl-3 mb-0">
             <li class="mb-2"><strong class="text-black">Published on:</strong> {{ job.timestamp|date:"d M Y" }}</li>
@@ -238,7 +238,7 @@
           </ul>
         </div>
 
-        <div class="bg-light p-3 border rounded">
+        <div class="bg-light p-3 shadow-container border rounded">
           <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Share</h3>
           <div class="px-3">
             <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-facebook"></span></a>

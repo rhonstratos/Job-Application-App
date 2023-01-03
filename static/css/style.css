@@ -70,6 +70,14 @@ input[type=file]::file-selector-button:hover {
   border: 0px;
 }
 
+.red-button{
+  background-color: rgb(209, 64, 64)!important;
+}
+
+.red-button:hover{
+  background-color: rgb(224, 104, 104)!important;
+}
+
 .bg-section {
   padding-top: 7rem;
   padding-bottom: 7rem;
@@ -2023,7 +2031,7 @@ h1, h2, h3, h4 {
       padding-bottom: 3rem; } }
 
 .text-black {
-  color: #000 !important; }
+  color: #345676 !important; }
 
 .home-section {
   position: relative; }
