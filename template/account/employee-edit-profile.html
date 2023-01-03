@@ -66,6 +66,7 @@
           {% if field.name == 'gender' %}
           <div class="row form-group mb-4">
             <div class="col-md-12 mb-3 mb-md-0">
+			<label class="form-check-label" for="">{{ field.label }}</label><br>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="gender" id="male gender" value="M"
                   {% if field.value == 'M' %} checked {% endif %}>
@@ -87,6 +88,27 @@
                 placeholder="{{ field.field.widget.attrs.placeholder }}">
 				        <a class="slide-button" style="  margin-top:30px;
                 margin-bottom:10px;" href="{% url 'account:edit-password' request.user.id %}">Change Password</a>
+            </div>
+          </div>
+		  {% elif field.name == 'updateViaEmail' %}
+		  <div class="row form-group mb-4">
+            <div class="col-md-12 mb-3 mb-md-0">
+			<label class="form-check-label" for="">Receive notifications</label><br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="{{ field.name }}" id="emailCheck"
+                  {% if field.value %} checked {% endif %}>
+                <label class="form-check-label" for="emailCheck">Via email</label>
+              </div>
+            </div>
+          </div>
+		  {% elif field.name == 'updateViaPhoneNumber' %}
+		  <div class="row form-group mb-4">
+            <div class="col-md-12 mb-3 mb-md-0">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="{{ field.name }}" id="phoneCheck"
+                  {% if field.value %} checked {% endif %}>
+                <label class="form-check-label" for="phoneCheck">Via phone number</label>
+              </div>
             </div>
           </div>
 		  {% elif field.name == 'category' %}

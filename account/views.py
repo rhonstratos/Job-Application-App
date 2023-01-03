@@ -77,7 +77,7 @@ def employee_edit_profile(request, id=id):
     if form.is_valid():
         form = form.save()
         messages.success(request, 'Your Profile Was Successfully Updated!')
-        return redirect(reverse("account:edit-profile", kwargs={
+        return redirect(reverse("account:edit-employee-profile", kwargs={
                                     'id': form.id
                                     }))
     context={
@@ -131,12 +131,12 @@ def edit_password(request, id=id):
 
     instance_user = get_object_or_404(User, id=int(id))
     form_edit_password = ChangePassword(instance_user, data=request.POST or None)
-    form = EmployerProfileEditForm(request.POST or None, instance=user)
+    form = EmployerProfileEditForm(request.POST or None, instance=instance_user)
 
     if form_edit_password.is_valid():
        form_edit_password.save()
        messages.success(request, 'Your Password Was Successfully Updated!')
-       return redirect(reverse("account:edit-employer-profile", kwargs={
+       return redirect(reverse("account:home", kwargs={
                                     'id': form.id
                                     }))
 

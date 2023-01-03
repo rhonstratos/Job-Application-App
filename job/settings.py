@@ -117,6 +117,9 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'localhosttest0@gmail.com'
 EMAIL_HOST_PASSWORD = 'leuegmejvoyhabrl'
 
+TWILIO_ACCOUNT_SID = 'AC584311c9d3963b8cd2460b7f1d0b7f29'
+TWILIO_AUTH_TOKEN = '93c8c0b9fefc3c4835b1522de479cc37'
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
