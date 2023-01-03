@@ -79,7 +79,7 @@ def employer_edit_profile(request, id=id):
     return render(request, 'account/employer-edit-profile.html', context)
 
 
-@login_required(login_url=reverse_lazy('accounts:login'))
+@login_required(login_url=reverse_lazy('account:login'))
 # @employee
 def employee_edit_profile(request, id=id):
     """
@@ -103,9 +103,9 @@ def employee_edit_profile(request, id=id):
 
     return render(request, 'account/employee-edit-profile.html', context)
 
-@login_required(login_url=reverse_lazy('accounts:login'))
+@login_required(login_url=reverse_lazy('account:login'))
 # @employee
-def employee_edit_password(request, id=id):
+def account_edit_password(request, id=id):
 
     instance_user = get_object_or_404(User, id=int(id))
     form_edit_password = EmployeeChangePassword(instance_user, data=request.POST or None)
