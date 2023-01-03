@@ -59,9 +59,6 @@
         {% endif %}
         <form method="POST" enctype="multipart/form-data" class="p-4 rounded shadow-container">
           {% csrf_token %}
-		  <img style="width: 20%; border-style: solid; border-color: #fcf2f7; border-width: 15px;" class="rounded-circle mx-auto d-block" src="{{user.profilePicture.url}}" />
-
-      
           {% for field in form %}
           {% if field.name == 'gender' %}
           <div class="row form-group mb-4">
@@ -87,45 +84,6 @@
                 placeholder="{{ field.field.widget.attrs.placeholder }}">
 				        <a class="slide-button" style="  margin-top:30px;
                 margin-bottom:10px;" href="{% url 'account:edit-password' request.user.id %}">Change Password</a>
-            </div>
-          </div>
-		  {% elif field.name == 'category' %}
-
-          <div class="row form-group">
-            <div class="col-md-12 mb-3 mb-md-0">
-              <label class="text-black" for="id_{{ field.name }}">{{ field.label }}</label><br>
-
-				<select name="category" class="border rounded" id="job-type" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Job Type">
-                              
-					{% for category in categories %}
-					
-						  <option value="{{ category.id }}" {% if category.id  ==  field.value %} selected {% endif %}>{{ category.name }}</option>
-
-					{% endfor %}
-
-
-				   
-			  </select>
-            </div>
-          </div>
-		  {% elif field.name == 'skills' or  field.name == 'qualifications' or field.name == 'experiences'%}
-		  <div class="row form-group">
-            <div class="col-md-12 mb-3 mb-md-0">
-              <label class="text-black" for="id_{{ field.name }}">{{ field.label }}</label>
-				<textarea style="resize: none;" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}" rows="4"
-					placeholder="{{ field.field.widget.attrs.placeholder }}">{{ field.value }}</textarea>
-            </div>
-          </div>
-          {% elif field.name == 'resume' %}
-
-          <div class="row form-group">
-            <div class="col-md-12 mb-3 mb-md-0">
-              <label class="text-black" for="id_{{ field.name }}">{{ field.label }}</label><br>
-			  <a class="slide-button" style="  margin-top:10px;
-        margin-bottom:20px;" href="{{user.resume.url}}">View current resume</a>	
-              <input type="{{ field.field.widget.input_type }}" class="form-control" name="{{ field.name }}"
-                id="id_{{ field.name }}" value="{{ field.value }}"
-                placeholder="{{ field.field.widget.attrs.placeholder }}">
             </div>
           </div>
 		  {% else %}
