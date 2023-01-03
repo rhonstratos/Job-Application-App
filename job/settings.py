@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-from django.contrib.messages import constants as messages
+import mimetypes
 import os
+from django.contrib.messages import constants as messages
+from pickle import TRUE
 # import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -95,7 +97,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'django_job_app_dev',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -177,8 +179,14 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    # 'django.contrib.staticfiles.finders.AppDirectoriesFinder',    #causes verbose duplicate notifications in django 1.9
+)
 
-#JAZZMIN SETTINGS
+# JAZZMIN SETTINGS
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
     "site_title": "JobApp200 Admin",
@@ -209,15 +217,15 @@ JAZZMIN_SETTINGS = {
 
     # Copyright on the footer
     "copyright": "JobApp200",
-}
 
+    "changeform_format": "horizontal_tabs"
+}
+JAZZMIN_SETTINGS["show_ui_builder"] = True
 JAZZMIN_UI_TWEAKS = {
     "theme": "litera",
 }
 
-JAZZMIN_SETTINGS["show_ui_builder"] = True
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# JAZZMIN_SETTINGS["show_ui_builder"] = True
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
@@ -246,11 +254,8 @@ MESSAGE_TAGS = {
 # Activate Django-Heroku.
 # django_heroku.settings(locals())
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
-DEFAULT_AUTO_FIELD='django.db.models.AutoField'
-
-#settings.py
+# settings.py
 if DEBUG:
-    import mimetypes
     mimetypes.add_type("application/javascript", ".js", True)
