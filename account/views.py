@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 
 from account.forms import *
-from jobapp.permission import user_is_employee
+from jobapp.permission import employee
 
 
 def get_success_url(request):
@@ -49,8 +49,7 @@ def employer_registration(request):
     if form.is_valid():
         form = form.save()
         return redirect('account:login')
-    context = {
-
+    context = { 
         'form': form
     }
 
@@ -81,7 +80,7 @@ def employer_edit_profile(request, id=id):
 
 
 @login_required(login_url=reverse_lazy('accounts:login'))
-@user_is_employee
+@employee
 def employee_edit_profile(request, id=id):
     """
     Handle Employee Profile Update Functionality
@@ -105,7 +104,7 @@ def employee_edit_profile(request, id=id):
     return render(request, 'account/employee-edit-profile.html', context)
 
 @login_required(login_url=reverse_lazy('accounts:login'))
-@user_is_employee
+@employee
 def employee_edit_password(request, id=id):
 
     instance_user = get_object_or_404(User, id=int(id))
@@ -117,7 +116,7 @@ def employee_edit_password(request, id=id):
 
     context={'form_edit_password': form_edit_password}
 
-    return render(request, 'jobapp/change-password.html', context)
+    return render(request, 'account/change-password.html', context)
 
 
 

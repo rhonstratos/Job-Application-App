@@ -2,7 +2,8 @@
 {% load static %}
 {% block content %}
 
-<section class="section-hero overlay inner-page bg-image"
+<!-- HOME -->
+<!-- <section class="section-hero overlay inner-page bg-image"
   style="background-image: url('{% static 'images/hero_1.jpg' %}');" id="home-section">
   <div class="container">
     <div class="row">
@@ -15,7 +16,22 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
+
+<!-- ======= Breadcrumbs Section ======= -->
+<section class="breadcrumbs">
+  <div class="container">
+
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>Update Profile</h2>
+      <ol>
+        <li><a href="{% url 'jobapp:home' %}">Home</a></li>
+        <li>Update Profile</li>
+      </ol>
+    </div>
+
+  </div>
+</section><!-- End Breadcrumbs Section -->
 
 <section class="site-section">
   <div class="container">
@@ -60,10 +76,20 @@
               </div>
             </div>
           </div>
-
-          {% else %}
-
+          {% elif field.name == 'email' %}
           <div class="row form-group">
+            <div class="col-md-12 mb-md-0">
+              <label class="text-black" for="id_{{ field.name }}">{{ field.label }}</label><br>
+              <input type="{{ field.field.widget.input_type }}" class="form-control" name="{{ field.name }}"
+                id="id_{{ field.name }}" value="{{ field.value }}"
+                placeholder="{{ field.field.widget.attrs.placeholder }}">
+				<a class="" href="{% url 'account:employee-edit-password' request.user.id %}">Change Password</a>
+            </div>
+          </div> 
+      {% elif field.name == 'resume' %} 
+		  {% else %}
+
+		  <div class="row form-group">
             <div class="col-md-12 mb-3 mb-md-0">
               <label class="text-black" for="id_{{ field.name }}">{{ field.label }}</label>
               <input type="{{ field.field.widget.input_type }}" class="form-control" name="{{ field.name }}"
@@ -71,7 +97,6 @@
                 placeholder="{{ field.field.widget.attrs.placeholder }}">
             </div>
           </div>
-
           {% endif %}
           {% endfor %}
           <div class="row form-group">
@@ -85,4 +110,5 @@
     </div>
   </div>
 </section>
+
 {% endblock %}
