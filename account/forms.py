@@ -259,9 +259,9 @@ class EmployerProfileEditForm(forms.ModelForm):
         fields = ["profilePicture", "username", "email", "phoneNumber", "first_name", "last_name"]
 
 
-class EmployeeChangePassword(PasswordChangeForm):
+class AccountChangePassword(PasswordChangeForm):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(AccountChangePassword).__init__(*args, **kwargs)
         self.fields["old_password"].widget = forms.PasswordInput(attrs={"class": "form-control"})
         self.fields["new_password1"].widget = forms.PasswordInput(attrs={"class": "form-control"})
         self.fields["new_password2"].widget = forms.PasswordInput(attrs={"class": "form-control"})

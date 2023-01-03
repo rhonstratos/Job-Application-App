@@ -22,8 +22,8 @@ urlpatterns = [
 
     # general url
     path('account/', include([
-        path('<int:id>/password/edit', views.employee_edit_password,
-             name='employee-edit-password')
+        path('<int:id>/password/edit', views.account_edit_password,
+             name='account-edit-password')
     ])),
 
     # path('profile/edit/password/<int:id>/',
