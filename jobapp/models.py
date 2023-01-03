@@ -5,6 +5,7 @@ from django.db.models.signals import post_save, post_init
 from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.conf import settings
+from twilio.rest import Client
 User = get_user_model()
 
 
@@ -57,6 +58,9 @@ def send_notifcation(sender, instance, **kwargs):
 	if instance.previous_state != instance.is_published:
 		if instance.is_published:
 			users = User.objects.filter(category=instance.category).values()
+			account_sid = 'AC584311c9d3963b8cd2460b7f1d0b7f29'
+			auth_token = '1084fe7a2a9d819d23c796987cac4217'
+			client = Client(account_sid, auth_token)
 
 			for singleuser in list(users):
 				message = f"Hello {singleuser.get('first_name')} {singleuser.get('last_name')}! you might want to take a look at this newly posted job: {instance.title} located in {instance.location}."
@@ -67,6 +71,14 @@ def send_notifcation(sender, instance, **kwargs):
 					[singleuser.get('email')],
 					fail_silently=False,
 				)
+
+				sms = client.messages.create(
+											body=message,
+											from_='+18454421980',
+											to=singleuser.get('phoneNumber')
+										)
+
+				print(sms.sid)
  
 
 class Applicant(models.Model):

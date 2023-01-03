@@ -103,6 +103,7 @@ class EmployeeRegistrationForm(UserCreationForm):
 class EmployerRegistrationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         UserCreationForm.__init__(self, *args, **kwargs)
+        self.fields['gender'].required = True
         self.fields['username'].label = "Username"
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
@@ -110,6 +111,7 @@ class EmployerRegistrationForm(UserCreationForm):
         self.fields['last_name'].label = "Company Address"
         self.fields['password1'].label = "Password"
         self.fields['password2'].label = "Confirm Password"
+        self.fields['gender'].label = "Gender"
 
         self.fields['username'].widget.attrs.update(
             {
@@ -153,7 +155,13 @@ class EmployerRegistrationForm(UserCreationForm):
         model = User
 
         fields = ['username',  'email', 'phoneNumber', 'password1', 
-			'password2', 'first_name', 'last_name',]
+			'password2', 'gender', 'first_name', 'last_name',]
+
+    def clean_gender(self):
+        gender = self.cleaned_data.get('gender')
+        if not gender:
+            raise forms.ValidationError("Gender is required")
+        return gender
 
     def save(self, commit=True):
         user = UserCreationForm.save(self, commit=False)

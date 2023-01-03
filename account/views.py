@@ -88,6 +88,18 @@ def employee_edit_profile(request, id=id):
 
     return render(request,'account/employee-edit-profile.html',context)
 
+@login_required(login_url=reverse_lazy('account:login'))
+@user_is_employee
+def delete_account(request, id):
+
+    user = get_object_or_404(User, id=id)
+
+    if user:
+
+        user.delete()
+        messages.success(request, 'Account Deleted!')
+
+    return redirect('account:login')
 
 @login_required(login_url=reverse_lazy('accounts:login'))
 @user_is_employee
