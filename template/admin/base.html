@@ -1,0 +1,16 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block messages %}
+{{block.super}}
+
+{% if request.path == '/admin/' %}
+<div style="text-align: right;">
+	<a href="{% url 'account:log-report' %}" target="_blank" class="addlink">
+		<button>
+			Generate log report
+		</button>
+	</a>
+</div>
+{% endif %}
+{% endblock %}

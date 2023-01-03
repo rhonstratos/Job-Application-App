@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body style="text-align: center;">
+	<h1>{{ report_name }}</h1>
+
+	
+	{% if report_name == 'List of employees' %}
+	<table>
+		<tr>
+			<th> Username </th>
+			<th> Email </th>
+			<th> Phone No </th>
+			<th> First Name </th>
+			<th> Last Name </th>
+			<th> Role </th>
+		</tr>
+		{%for user in users %}
+		<tr>
+			<td style=""> {{ user.username }} </td>
+			<td style=""> {{ user.email }} </td>
+			<td style=""> {{ user.phoneNumber }} </td>
+			<td style=""> {{ user.first_name }} </td>
+			<td style=""> {{ user.last_name }} </td>
+			<td style=""> {{ user.role }} </td>
+		</tr>
+		{%endfor%}
+	</table>
+	{% elif report_name == 'List of employers' %}
+	<table>
+		<tr>
+			<th> Username </th>
+			<th> Email </th>
+			<th> Phone No </th>
+			<th> Company Name </th>
+			<th> Company Location </th>
+			<th> Role </th>
+		</tr>
+		{%for user in users %}
+		<tr>
+			<td style=""> {{ user.username }} </td>
+			<td style=""> {{ user.email }} </td>
+			<td style=""> {{ user.phoneNumber }} </td>
+			<td style=""> {{ user.first_name }} </td>
+			<td style=""> {{ user.last_name }} </td>
+			<td style=""> {{ user.role }} </td>
+		</tr>
+		{%endfor%}
+	</table>
+	{% elif report_name == 'Job lists' %}
+	<table>
+		<tr>
+			<th> Job Title </th>
+			<th> Company Name </th>
+			<th> Is Published </th>
+			<th> Is Closed </th>
+			<th> Timestamp </th>
+		</tr>
+		{%for job in jobs %}
+		<tr>
+			<td style=""> {{ job.title }} </td>
+			<td style=""> {{ job.company_name }} </td>
+			<td style=""> {{ job.is_published }} </td>
+			<td style=""> {{ job.is_closed }} </td>
+			<td style=""> {{ job.timestamp }} </td>
+		</tr>
+		{%endfor%}
+	</table>
+	{% elif report_name == 'Company lists' %}
+	<table>
+		<tr>
+			<th> Company Name </th>
+			<th> Company Description </th>
+			<th> Url </th>
+		</tr>
+		{%for company in companies %}
+		<tr>
+			<td style=""> {{ company.company_name }} </td>
+			<td style=""> {{ company.company_description }} </td>
+			<td style=""> {{ company.url }} </td>
+		</tr>
+		{%endfor%}
+	</table>
+	{% elif report_name == 'Log report' %}
+	<table>
+		<tr>
+			<th> Time </th>
+			<th> User </th>
+			<th> Log </th>
+		</tr>
+		{%for log in logs %}
+		<tr>
+			<td style=""> {{ log.action_time }} </td>
+			<td style=""> {{ log.user }} </td>
+			<td style=""> {{ log.get_change_message }} </td>
+		</tr>
+		{%endfor%}
+	</table>
+	{% endif %}
+</body>
+</html>

@@ -4,11 +4,15 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect , get_object_or_404
 from django.urls import reverse, reverse_lazy
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.admin.models import LogEntry, ADDITION, CHANGE, DELETION
 
 from account.forms import *
 from jobapp.models import *
 from jobapp.permission import user_is_employee, user_is_employer
+from account.utils import render_to_pdf
 
+user_changed = "Updated their profile"
 
 def get_success_url(request):
 
@@ -33,6 +37,7 @@ def employee_registration(request):
     form = EmployeeRegistrationForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form = form.save()
+
         return redirect('account:login')
     context={
         
@@ -76,6 +81,16 @@ def employee_edit_profile(request, id=id):
     form = EmployeeProfileEditForm(request.POST or None, request.FILES or None, instance=user)
     if form.is_valid():
         form = form.save()
+
+        LogEntry.objects.log_action(
+			user_id=request.user.id,
+			content_type_id = ContentType.objects.get_for_model(User).pk,
+			object_id = User.pk,
+			object_repr=user_changed, #or any field you wish to represent here
+			change_message=user_changed, # a new user has been added
+			action_flag=CHANGE
+		)
+
         messages.success(request, 'Your Profile Was Successfully Updated!')
         return redirect(reverse("account:edit-employee-profile", kwargs={
                                     'id': form.id
@@ -102,6 +117,16 @@ def employer_edit_profile(request, id=id):
     form = EmployerProfileEditForm(request.POST or None, instance=user)
     if form.is_valid():
         form = form.save()
+
+        LogEntry.objects.log_action(
+			user_id=request.user.id,
+			content_type_id = ContentType.objects.get_for_model(User).pk,
+			object_id = User.pk,
+			object_repr=user_changed, #or any field you wish to represent here
+			change_message=user_changed, # a new user has been added
+			action_flag=CHANGE
+		)
+		
         messages.success(request, 'Your Profile Was Successfully Updated!')
         return redirect(reverse("account:edit-employer-profile", kwargs={
                                     'id': form.id
@@ -178,3 +203,44 @@ def user_logOut(request):
     auth.logout(request)
     messages.success(request, 'You are Successfully logged out')
     return redirect('account:login')
+
+
+def user_report_employee(request):
+    template_name = "pdf/report.html"
+    report_name = "List of employers"
+    users = User.objects.filter(role="employee")
+
+    return render_to_pdf(
+        template_name,
+        {
+            "users": users,
+			"report_name": report_name
+        },
+    )
+
+def user_report_employer(request):
+    template_name = "pdf/report.html"
+    report_name = "List of employers"
+    users = User.objects.filter(role="employer")
+
+    return render_to_pdf(
+        template_name,
+        {
+            "users": users,
+			"report_name": report_name
+        },
+    )
+
+
+def log_report(request):
+    template_name = "pdf/report.html"
+    report_name = "Log report"
+    logs = LogEntry.objects.all().order_by("-id")[:200]
+
+    return render_to_pdf(
+        template_name,
+        {
+            "logs": logs,
+			"report_name": report_name
+        },
+    )

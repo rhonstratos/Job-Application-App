@@ -217,6 +217,9 @@ JAZZMIN_SETTINGS = {
     # Copyright on the footer
     "copyright": "JobApp200",
 
+	"changeform_format": "single",
+    # override change forms on a per modeladmin basis
+
 
 
 }
