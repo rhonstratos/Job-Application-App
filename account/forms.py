@@ -219,6 +219,45 @@ class EmployeeProfileEditForm(forms.ModelForm):
         model = User
         fields = ["profilePicture", "username", "email", "phoneNumber", "first_name", "last_name", "gender", "resume"]
 
+class EmployerProfileEditForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(EmployerProfileEditForm, self).__init__(*args, **kwargs)
+		
+        profilePicture = forms.ImageField()
+        self.fields['username'].widget.attrs.update(
+            {
+                'placeholder': 'Enter Username',
+            }
+        )
+        self.fields['email'].widget.attrs.update(
+            {
+                'placeholder': 'Enter Email',
+            }
+        )
+        self.fields['phoneNumber'].widget.attrs['class'] = 'number'
+        self.fields['phoneNumber'].widget.attrs.update(
+            {
+                'placeholder': 'Enter Phone Number',
+            }
+        )
+        self.fields['first_name'].label = "Company Name"
+        self.fields['first_name'].widget.attrs.update(
+            {
+                'placeholder': 'Enter Comapny Name',
+            }
+        )
+        self.fields['last_name'].label = "Company Address"
+        self.fields['last_name'].widget.attrs.update(
+            {
+                'placeholder': 'Enter Company Address',
+            }
+        ) 
+
+    class Meta:
+        model = User
+        fields = ["profilePicture", "username", "email", "phoneNumber", "first_name", "last_name"]
+
 
 class EmployeeChangePassword(PasswordChangeForm):
     def __init__(self, *args, **kwargs):

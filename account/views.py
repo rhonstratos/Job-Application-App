@@ -63,7 +63,7 @@ def employer_edit_profile(request, id=id):
     """
 
     user = get_object_or_404(User, id=id)
-    form = EmployeeProfileEditForm(
+    form = EmployerProfileEditForm(
         request.POST or None, request.FILES or None, instance=user)
     if form.is_valid():
         form = form.save()
@@ -80,7 +80,7 @@ def employer_edit_profile(request, id=id):
 
 
 @login_required(login_url=reverse_lazy('accounts:login'))
-@employee
+# @employee
 def employee_edit_profile(request, id=id):
     """
     Handle Employee Profile Update Functionality
@@ -104,11 +104,12 @@ def employee_edit_profile(request, id=id):
     return render(request, 'account/employee-edit-profile.html', context)
 
 @login_required(login_url=reverse_lazy('accounts:login'))
-@employee
+# @employee
 def employee_edit_password(request, id=id):
 
     instance_user = get_object_or_404(User, id=int(id))
     form_edit_password = EmployeeChangePassword(instance_user, data=request.POST or None)
+
 
     if form_edit_password.is_valid():
        form_edit_password.save()

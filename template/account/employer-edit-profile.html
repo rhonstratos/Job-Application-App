@@ -61,21 +61,7 @@
           {% csrf_token %}
 		  <img style="width: 100%;" src="{{user.profilePicture.url}}" />
           {% for field in form %}
-          {% if field.name == 'gender' %}
-          <div class="row form-group mb-4">
-            <div class="col-md-12 mb-3 mb-md-0">
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" id="male gender" value="M"
-                  {% if field.value == 'M' %} checked {% endif %}>
-                <label class="form-check-label" for="male">Male</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" id="female" value="F"
-                  {% if field.value == 'F' %} checked {% endif %}>
-                <label class="form-check-label" for="female">Female</label>
-              </div>
-            </div>
-          </div>
+          {% if field.name == 'gender' %} 
           {% elif field.name == 'email' %}
           <div class="row form-group">
             <div class="col-md-12 mb-md-0">
@@ -86,7 +72,7 @@
 				<a class="" href="{% url 'account:employee-edit-password' request.user.id %}">Change Password</a>
             </div>
           </div> 
-      {% elif field.name == 'resume' %} 
+      {% elif field.name == 'resume' %}
 		  {% else %}
 
 		  <div class="row form-group">

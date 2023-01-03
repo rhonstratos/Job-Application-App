@@ -189,6 +189,12 @@ JAZZMIN_SETTINGS = {
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
     "site_brand": "JobApp200",
 
+    # Logo to use for your site, must be present in static files, used for brand on top left
+    "site_logo": 'images/team/allen.jpg',
+
+    # Relative path to a favicon for your site, will default to site_logo if absent (ideally 32x32 px)
+    "site_icon": None,
+
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
     "login_logo": None,
 
@@ -198,17 +204,11 @@ JAZZMIN_SETTINGS = {
     # CSS classes that are applied to the logo above
     "site_logo_classes": "img-circle",
 
-    # Relative path to a favicon for your site, will default to site_logo if absent (ideally 32x32 px)
-    "site_icon": None,
-
     # Welcome text on the login screen
     "welcome_sign": "Welcome to JobApp200",
 
     # Copyright on the footer
     "copyright": "JobApp200",
-
-
-
 }
 
 JAZZMIN_UI_TWEAKS = {
