@@ -9,7 +9,7 @@ a{
   text-decoration: none !important;
 }
 
-input[type=text], input[type=email], input[type=file], input[type=password]  {
+input[type=text], input[type=email], input[type=file], input[type=password], input[type=url] {
   border-radius: 30px !important;
 }
 
