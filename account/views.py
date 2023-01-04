@@ -34,6 +34,7 @@ def employee_registration(request):
     form = EmployeeRegistrationForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form = form.save()
+        messages.success(request, 'Your account is successfully created!')
 
         return redirect('account:login')
     context={
@@ -55,6 +56,7 @@ def employer_registration(request):
         request.POST or None, request.FILES or None)
     if form.is_valid():
         form = form.save()
+        messages.success(request, 'Your account is successfully created!')
         return redirect('account:login')
     context = { 
         'form': form
@@ -99,6 +101,7 @@ def employee_edit_profile(request, id=id):
     form = EmployeeProfileEditForm(request.POST or None, request.FILES or None, instance=user)
     if form.is_valid():
         form = form.save()
+        messages.success(request, 'Your Profile Was Successfully Updated!')
 
         LogEntry.objects.log_action(
 			user_id=request.user.id,
