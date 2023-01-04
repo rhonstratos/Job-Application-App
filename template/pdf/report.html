@@ -5,13 +5,38 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+	<style>
+
+
+		table {
+  border-collapse: collapse;
+  width: 100%;
+  vertical-align: middle;
+}
+
+td {
+  padding: 3px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2;
+}
+
+th {
+	background-color: #d43076;
+ 	color: white;
+	 padding-top: 3px;
+}
+
+
+	</style>
 </head>
-<body style="text-align: center;">
-	<h1>{{ report_name }}</h1>
+<body style="text-align: center; font-family: 'Poppins';">
+	<img src="static/images/job app 200-transparent.png" style="width: 150px;" class="img-fluid" alt="">
+	<h1 style="color: #345676;";>{{ report_name }}</h1>
 
 	
 	{% if report_name == 'List of employees' %}
-	<table>
+	<table style="">
 		<tr>
 			<th> Username </th>
 			<th> Email </th>
@@ -88,7 +113,7 @@
 	</table>
 	{% elif report_name == 'Log report' %}
 	<table>
-		<tr>
+		<tr style="">
 			<th> Time </th>
 			<th> User </th>
 			<th> Log </th>
