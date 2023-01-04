@@ -9,7 +9,7 @@ from django.contrib.admin.models import LogEntry, ADDITION, CHANGE, DELETION
 
 from account.forms import *
 from jobapp.models import *
-from jobapp.permission import user_is_employee, user_is_employer
+from jobapp.permission import employee, employer
 from account.utils import render_to_pdf
 
 user_changed = "Updated their profile"
@@ -123,7 +123,7 @@ def employee_edit_profile(request, id=id):
 
 
 @login_required(login_url=reverse_lazy('accounts:login'))
-@user_is_employer
+@employer
 def employer_edit_profile(request, id=id):
 
     """
@@ -173,15 +173,12 @@ def delete_account(request, id):
 def edit_password(request, id=id):
 
     instance_user = get_object_or_404(User, id=int(id))
-    form_edit_password = ChangePassword(instance_user, data=request.POST or None)
-    form = EmployerProfileEditForm(request.POST or None, instance=instance_user)
+    form_edit_password = AccountChangePassword(instance_user, data=request.POST or None)
 
     if form_edit_password.is_valid():
        form_edit_password.save()
        messages.success(request, 'Your Password Was Successfully Updated!')
-       return redirect(reverse("account:home", kwargs={
-                                    'id': form.id
-                                    }))
+       return redirect(reverse("account:login"))
 
     context={'form_edit_password': form_edit_password}
 

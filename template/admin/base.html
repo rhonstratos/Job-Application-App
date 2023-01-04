@@ -269,9 +269,20 @@
                     <div class="row">
                         <div class="col-12 col-md-auto d-flex flex-grow-1 align-items-center">
                             <h1 class="h4 m-0 pr-3 mr-3 border-right">{% block content_title %}{% endblock %}</h1>
-                            {% block breadcrumbs %}{% endblock %}
+                            {% block breadcrumbs %}
+							{% endblock %}
                         </div>
                         {% block page_actions %}{% endblock %}
+						
+						{% if request.path == '/admin/' %}
+						<div style="text-align: right;">
+							<a href="{% url 'account:log-report' %}" target="_blank" class="addlink">
+								<button>
+									Generate log report
+								</button>
+							</a>
+						</div>
+						{% endif %}
                     </div>
                 </div>
             </div>
@@ -281,6 +292,8 @@
                 <div class="container-fluid">
                     <section id="content" class="content">
                         {% block messages %}
+						
+						{{ block.super }}
                             {% for message in messages %}
                                 {% if message.tags == 'success' %}
                                     <div class="alert alert-success alert-dismissible">
@@ -383,14 +396,3 @@
 
 </body>
 </html>
-
-{% if request.path == '/admin/' %}
-<div style="text-align: right;">
-	<a href="{% url 'account:log-report' %}" target="_blank" class="addlink">
-		<button>
-			Generate log report
-		</button>
-	</a>
-</div>
-{% endif %}
-{% endblock %}
