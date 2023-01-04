@@ -68,3 +68,18 @@ p {
     background-color: #e4679d;
     border-color: #e4679d;
 }
+
+button{
+    background-color: #d43076 !important;
+    border-color: #d43076 !important;
+    border-style: solid;
+    color: #fff;
+    font-size: .875rem;
+    border-radius: 30px !important;
+    padding: 5px 12px;
+}
+
+button:hover {
+    background-color: #e4679d !important;
+    border-color: #e4679d !important;
+}
