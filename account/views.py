@@ -2,20 +2,19 @@ from django.contrib import auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect , get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import LogEntry, ADDITION, CHANGE, DELETION
 
 from account.forms import *
 from jobapp.models import *
-from jobapp.permission import user_is_employee, user_is_employer
+from jobapp.permission import employee, employer
 from account.utils import render_to_pdf
 
 user_changed = "Updated their profile"
 
 def get_success_url(request):
-
     """
     Handle Success Url After LogIN
 
@@ -26,9 +25,7 @@ def get_success_url(request):
         return reverse('jobapp:home')
 
 
-
 def employee_registration(request):
-
     """
     Handle Employee Registration
 
@@ -37,6 +34,7 @@ def employee_registration(request):
     form = EmployeeRegistrationForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form = form.save()
+        messages.success(request, 'Your account is successfully created!')
 
         return redirect('account:login')
     context={
@@ -45,32 +43,54 @@ def employee_registration(request):
 			'categories': categories
         }
 
-    return render(request,'account/employee-registration.html',context)
+    return render(request, 'account/employee-registration.html', context)
 
 
 def employer_registration(request):
-
     """
     Handle Employee Registration 
 
     """
 
-    form = EmployerRegistrationForm(request.POST or None, request.FILES or None)
+    form = EmployerRegistrationForm(
+        request.POST or None, request.FILES or None)
     if form.is_valid():
         form = form.save()
+        messages.success(request, 'Your account is successfully created!')
         return redirect('account:login')
-    context={
-        
-            'form':form
-        }
+    context = { 
+        'form': form
+    }
 
-    return render(request,'account/employer-registration.html',context)
+    return render(request, 'account/employer-registration.html', context)
 
 
-@login_required(login_url=reverse_lazy('accounts:login'))
-@user_is_employee
+def employer_edit_profile(request, id=id):
+    """
+    Handle Employer Profile Update Functionality
+
+    """
+
+    user = get_object_or_404(User, id=id)
+    form = EmployerProfileEditForm(
+        request.POST or None, request.FILES or None, instance=user)
+    if form.is_valid():
+        form = form.save()
+        messages.success(request, 'Your Profile Was Successfully Updated!')
+        return redirect(reverse("account:employer-profile", kwargs={
+            'id': form.id
+        }))
+    context = {
+        'user': user,
+        'form': form
+    }
+
+    return render(request, 'account/employer-edit-profile.html', context)
+
+
+@login_required(login_url=reverse_lazy('account:login'))
+# @employee
 def employee_edit_profile(request, id=id):
-
     """
     Handle Employee Profile Update Functionality
 
@@ -81,6 +101,7 @@ def employee_edit_profile(request, id=id):
     form = EmployeeProfileEditForm(request.POST or None, request.FILES or None, instance=user)
     if form.is_valid():
         form = form.save()
+        messages.success(request, 'Your Profile Was Successfully Updated!')
 
         LogEntry.objects.log_action(
 			user_id=request.user.id,
@@ -101,11 +122,11 @@ def employee_edit_profile(request, id=id):
 			'categories': categories
         }
 
-    return render(request,'account/employee-edit-profile.html',context)
+    return render(request, 'account/employee-edit-profile.html', context)
 
 
 @login_required(login_url=reverse_lazy('accounts:login'))
-@user_is_employer
+@employer
 def employer_edit_profile(request, id=id):
 
     """
@@ -155,35 +176,30 @@ def delete_account(request, id):
 def edit_password(request, id=id):
 
     instance_user = get_object_or_404(User, id=int(id))
-    form_edit_password = ChangePassword(instance_user, data=request.POST or None)
-    form = EmployerProfileEditForm(request.POST or None, instance=instance_user)
+    form_edit_password = AccountChangePassword(instance_user, data=request.POST or None)
 
     if form_edit_password.is_valid():
        form_edit_password.save()
        messages.success(request, 'Your Password Was Successfully Updated!')
-       return redirect(reverse("account:home", kwargs={
-                                    'id': form.id
-                                    }))
+       return redirect(reverse("account:login"))
 
     context={'form_edit_password': form_edit_password}
 
-    return render(request, 'jobapp/change-password.html', context)
+    return render(request, 'account/change-password.html', context)
 
 
 
 def user_logIn(request):
-
     """
     Provides users to logIn
 
     """
 
     form = UserLoginForm(request.POST or None)
-    
 
     if request.user.is_authenticated:
         return redirect('/')
-    
+
     else:
         if request.method == 'POST':
             if form.is_valid():
@@ -193,7 +209,7 @@ def user_logIn(request):
         'form': form,
     }
 
-    return render(request,'account/login.html',context)
+    return render(request, 'account/login.html', context)
 
 
 def user_logOut(request):
@@ -201,7 +217,7 @@ def user_logOut(request):
     Provide the ability to logout
     """
     auth.logout(request)
-    messages.success(request, 'You are Successfully logged out')
+    messages.success(request, 'You Successfully logged out')
     return redirect('account:login')
 
 

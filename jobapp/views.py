@@ -14,7 +14,7 @@ from account.utils import render_to_pdf
 from account.models import User
 from jobapp.forms import *
 from jobapp.models import *
-from jobapp.permission import *
+from jobapp.permission import employer, employee
 User = get_user_model()
 
 def home_view(request):
@@ -80,7 +80,7 @@ def job_list_View(request):
 
 
 @login_required(login_url=reverse_lazy('account:login'))
-@user_is_employer
+@employer
 def create_job_View(request):
     """
     Provide the ability to create job post
@@ -97,7 +97,7 @@ def create_job_View(request):
             # for save tags
             form.save_m2m()
             messages.success(
-                    request, 'You are successfully posted your job! Please wait for review.')
+                    request, 'You successfully posted a job! Please wait for the admin to review.')
             return redirect(reverse("jobapp:single-job", kwargs={
                                     'id': instance.id
                                     }))
@@ -184,7 +184,7 @@ def search_result_view(request):
 
 
 @login_required(login_url=reverse_lazy('account:login'))
-@user_is_employee
+@employee
 def apply_job_view(request, id):
 
     form = JobApplyForm(request.POST or None)
@@ -250,7 +250,7 @@ def dashboard_view(request):
 
 
 @login_required(login_url=reverse_lazy('account:login'))
-@user_is_employer
+@employer
 def delete_job_view(request, id):
 
     job = get_object_or_404(Job, id=id, user=request.user.id)
@@ -264,7 +264,7 @@ def delete_job_view(request, id):
 
 
 @login_required(login_url=reverse_lazy('account:login'))
-@user_is_employer
+@employer
 def make_complete_job_view(request, id):
     job = get_object_or_404(Job, id=id, user=request.user.id)
 
@@ -281,7 +281,7 @@ def make_complete_job_view(request, id):
 
 
 @login_required(login_url=reverse_lazy('account:login'))
-@user_is_employer
+@employer
 def all_applicants_view(request, id):
 
     all_applicants = Applicant.objects.filter(job=id)
@@ -295,7 +295,7 @@ def all_applicants_view(request, id):
 
 
 @login_required(login_url=reverse_lazy('account:login'))
-@user_is_employee
+@employee
 def delete_bookmark_view(request, id):
 
     job = get_object_or_404(BookmarkJob, id=id, user=request.user.id)
@@ -309,7 +309,7 @@ def delete_bookmark_view(request, id):
 
 
 @login_required(login_url=reverse_lazy('account:login'))
-@user_is_employer
+@employer
 def applicant_details_view(request, id):
 
     applicant = get_object_or_404(User, id=id)
@@ -323,7 +323,7 @@ def applicant_details_view(request, id):
 
 
 @login_required(login_url=reverse_lazy('account:login'))
-@user_is_employee
+@employee
 def job_bookmark_view(request, id):
 
     form = JobBookmarkForm(request.POST or None)
@@ -359,7 +359,7 @@ def job_bookmark_view(request, id):
 
 
 @login_required(login_url=reverse_lazy('account:login'))
-@user_is_employer
+@employer
 def job_edit_view(request, id=id):
     """
     Handle Job Update

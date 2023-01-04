@@ -37,7 +37,8 @@
     <section class="site-section block__18514" id="next-section">
       <div class="container">
         <div class="row">
-          <div class="col-lg-3 mr-auto">
+
+          <!-- <div class="col-lg-3 mr-auto">
             <div class="border p-4 rounded">
               <ul class="list-unstyled block__47528 mb-0">
                 <a href="{{applicant.resume.url}}">View Resume</a>
@@ -45,7 +46,7 @@
             </div>
           </div>
           <div class="col-lg-8">
-			<img src="{{applicant.profilePicture.url}}" alt="">
+			<img style="width: 30%;" src="{{applicant.profilePicture.url}}" alt="">
             <h2 class="mb-4">{{ applicant.get_full_name }}</h2>
             <p><h3>Email :</h3>{{ applicant.email }}</p>
             <p><h3>Phone Number :</h3>{{ applicant.phoneNumber }}</p>
@@ -60,7 +61,51 @@
             <p><h3>Qualifications :</h3>{{ applicant.qualifications }}</p>
             <p><h3>Experiences :</h3>{{ applicant.experiences }}</p>
             <p><a href="mailto:{{ applicant.email }}" class="btn btn-primary btn-md mt-4">Contact</a></p>
+          </div> -->
+
+
+
+
+
+
+          <div class="p-4 rounded shadow-container">
+            
+        <img style="width: 20%; border-style: solid; border-color: #fcf2f7; border-width: 15px;" class="rounded-circle mx-auto d-block" src="{{applicant.profilePicture.url}}" />
+
+        <h2 style="color: #345676; margin-top: 10px;;" class="mb-4 text-center">{{ applicant.get_full_name }}</h2>
+            <p><h3 style="font-size: 1.2rem;">Email :</h3>{{ applicant.email }}</p>
+            <p><h3 style="font-size: 1.2rem;">Phone Number :</h3>{{ applicant.phoneNumber }}</p>
+            <p><h3 style="font-size: 1.2rem;">Gender :</h3>
+                {% if applicant.gender == 'M' %}
+                    Male
+                {% else %}
+                    Female
+                {% endif %}
+            </p>
+            <p><h3 style="font-size: 1.2rem;">Skills :</h3>{{ applicant.skills }}</p>
+            <p><h3 style="font-size: 1.2rem;">Qualifications :</h3>{{ applicant.qualifications }}</p>
+            <p><h3 style="font-size: 1.2rem;">Experiences :</h3>{{ applicant.experiences }}</p>
+            
+            <div class="row form-group">
+              <div class="col-md-6">
+            <p><a href="mailto:{{ applicant.email }}" class="btn btn-primary btn-md mt-4 make-round">Contact</a></p>
+            </div>
           </div>
+
+          <div class="row form-group">
+            <div class="col-md-6">
+              <ul class="list-unstyled block__47528 mb-0">
+                <a href="{{applicant.resume.url}}" class="make-round btn-md btn btn-primary">View Resume</a>
+              </ul>
+          </div>
+        </div>
+        
+          
+  
+          </div>
+
+
+
         </div>
       </div>
     </section>

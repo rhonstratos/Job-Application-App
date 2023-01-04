@@ -1,6 +1,6 @@
 from django.core.exceptions import PermissionDenied
 
-def user_is_employer(function):
+def employer(function):
 
     def wrap(request, *args, **kwargs):   
 
@@ -13,7 +13,7 @@ def user_is_employer(function):
 
 
 
-def user_is_employee(function):
+def employee(function):
 
     def wrap(request, *args, **kwargs):    
 
