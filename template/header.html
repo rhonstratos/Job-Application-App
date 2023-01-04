@@ -1,3 +1,4 @@
+{% load static %}
 <div id="overlayer"></div>
 <div class="loader">
   <div class="spinner-border text-primary" role="status">
@@ -15,7 +16,7 @@
     <div class="logo">
       <!-- <h1><a href="index.html">JobApp<span>200</span></a></h1> -->
       <!-- Uncomment below if you prefer to use an image logo -->
-      <a href="{% url 'jobapp:home' %}"><img src="static/images/job app 200-transparent.png" alt="" class="img-fluid"></a>
+      <a href="{% url 'jobapp:home' %}"><img src="{% static 'images/job app 200-transparent.png' %}" alt="" class="img-fluid"></a>
     </div>
 
     <nav id="navbar" class="navbar">
