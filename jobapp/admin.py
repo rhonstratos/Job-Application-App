@@ -11,7 +11,7 @@ admin.site.register(Applicant,ApplicantAdmin)
 
 
 class JobAdmin(admin.ModelAdmin):
-    list_display = ('title','is_published','is_closed','timestamp')
+    list_display = ('title', 'company_name', 'is_published','is_closed','timestamp')
 
 admin.site.register(Job,JobAdmin)
 

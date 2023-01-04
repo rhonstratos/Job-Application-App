@@ -25,7 +25,9 @@ urlpatterns = [
     path('dashboard/employer/delete/<int:id>/', views.delete_job_view, name='delete'),
     path('dashboard/employee/delete-bookmark/<int:id>/', views.delete_bookmark_view, name='delete-bookmark'),
 
-
+	# all about reports
+	path('reports/jobs', views.job_report, name='job-report'),
+	path('reports/companies', views.company_report, name='company-report')
 ]
 
 if settings.DEBUG:

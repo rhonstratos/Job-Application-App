@@ -13,4 +13,9 @@ urlpatterns = [
     path('login/', views.user_logIn, name='login'),
     path('logout/', views.user_logOut, name='logout'),
     path('profile/delete/<int:id>/', views.delete_account, name='delete'),
+
+	# url about reports
+	path('reports/user/employees', views.user_report_employee, name='user-report-employee'),
+	path('reports/user/employers', views.user_report_employer, name='user-report-employer'),
+	path('reports/logs', views.log_report, name='log-report')
 ]

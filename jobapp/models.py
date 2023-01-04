@@ -80,6 +80,7 @@ def send_notifcation(sender, instance, **kwargs):
 									to=singleuser.get('phoneNumber')
 								)
 					print(sms.sid)
+
  
 
 class Applicant(models.Model):

@@ -1,0 +1,37 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls %}
+
+{% block object-tools-items %}
+
+
+{% if "/user/" in request.path %}
+<a href="{% url 'account:user-report-employee' %}" target="_blank" class="addlink">
+	<button>
+		Generate report of employees
+	</button>
+</a>
+<a href="{% url 'account:user-report-employer' %}" target="_blank" class="addlink">
+	<button>
+		Generate report of employers
+	</button>
+</a>
+{% elif "/job/" in request.path %}
+<a href="{% url 'jobapp:job-report' %}" target="_blank" class="addlink">
+	<button>
+		Generate report of jobs
+	</button>
+</a>
+<a href="{% url 'jobapp:company-report' %}" target="_blank" class="addlink">
+	<button>
+		Generate report of companies
+	</button>
+</a>
+{% endif %}
+
+{% url cl.opts|admin_urlname:'add' as add_url %}
+<a href="{% add_preserved_filters add_url is_popup to_field %}" class="addlink">
+	<button>
+		{% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
+	</button>
+</a>
+{% endblock %}

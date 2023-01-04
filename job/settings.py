@@ -248,7 +248,6 @@ CKEDITOR_CONFIGS = {
 }
 
 
-
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
     messages.INFO: 'alert-info',

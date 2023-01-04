@@ -9,6 +9,7 @@ from django.http import Http404, HttpResponseRedirect, JsonResponse
 from django.core.serializers import serialize
 from django.views.decorators.cache import cache_page
 from django.core.cache import cache
+from account.utils import render_to_pdf
 
 from account.models import User
 from jobapp.forms import *
@@ -384,3 +385,30 @@ def job_edit_view(request, id=id):
     }
 
     return render(request, 'jobapp/job-edit.html', context)
+
+
+def job_report(request):
+    template_name = "pdf/report.html"
+    report_name = "Job lists"
+    jobs = Job.objects.all()
+
+    return render_to_pdf(
+        template_name,
+        {
+            "jobs": jobs,
+			"report_name": report_name
+        },
+    )
+
+def company_report(request):
+    template_name = "pdf/report.html"
+    report_name = "Company lists"
+    companies = Job.objects.all()
+
+    return render_to_pdf(
+        template_name,
+        {
+            "companies": companies,
+			"report_name": report_name
+        },
+    )
